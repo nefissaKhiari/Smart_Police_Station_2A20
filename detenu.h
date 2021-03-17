@@ -36,7 +36,7 @@ public:
      bool ajouter();
      QSqlQueryModel* afficher();
      bool supprimer(int);
-      bool modifier();
+      bool modifier(int,QString,QString,QString,QString,QString,int,int,QString,QString);
 private:
         int id_detenu;
         QString nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,periode_detenu,dossier_detenu;

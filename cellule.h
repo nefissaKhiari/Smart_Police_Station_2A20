@@ -26,7 +26,7 @@ public:
     bool ajouter2();
     QSqlQueryModel* afficher2();
     bool supprimer2(int);
-    bool modifier2();
+    bool modifier_cellule(int,QString,int,int,int);
 private:
         int id_cellule,nb_lits,superficie_cellule,nb_detenus;
         QString type_cellule;

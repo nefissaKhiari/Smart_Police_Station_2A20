@@ -28,6 +28,12 @@ private slots:
 
     void on_pb_supprimer_2_clicked();
 
+    void on_tab_detenu_activated(const QModelIndex &index);
+
+    void on_tab_cellule_activated(const QModelIndex &index);
+
+    void on_modifier_cellule_clicked();
+
 private:
     Ui::MainWindow *ui;
    Detenu D;

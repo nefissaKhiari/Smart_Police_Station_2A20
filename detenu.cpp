@@ -72,7 +72,7 @@ bool Detenu::ajouter()
     return query.exec();
 
 }
-
+/*
 bool Detenu::modifier()
 {
     QSqlQuery query;
@@ -96,8 +96,28 @@ bool Detenu::modifier()
 
 
       return query.exec();
-}
+}*/
+bool Detenu::modifier(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu )
+{
+    QSqlQuery query;
+    QString id_detenu_string=QString::number(id_detenu);
+    QString taille_detenu_string=QString::number(taille_detenu);
+    QString poids_detenu_string=QString::number(poids_detenu);
 
+
+    query.prepare("update detenu set id_detenu='"+id_detenu_string+"', nom_detenu='"+nom_detenu+"',prenom_detenu='"+prenom_detenu+"',date_naissance_detenu='"+date_naissance_detenu+"',nationalite_detenu='"+nationalite_detenu+"',sexe_detenu='"+sexe_detenu+"',taille_detenu='"+taille_detenu_string+"',poids_detenu='"+poids_detenu_string+"',periode_detenu='"+periode_detenu+"',dossier_detenu='"+dossier_detenu+"' where id_detenu=:id_detenu");
+    query.bindValue(0, id_detenu_string);
+    query.bindValue(1, nom_detenu);
+    query.bindValue(2, prenom_detenu);
+    query.bindValue(3,date_naissance_detenu );
+    query.bindValue(4, nationalite_detenu);
+    query.bindValue(5, sexe_detenu);
+    query.bindValue(6, taille_detenu_string);
+    query.bindValue(7, poids_detenu_string);
+    query.bindValue(8, periode_detenu);
+    query.bindValue(9, dossier_detenu);
+    return query.exec();
+}
 bool Detenu::supprimer(int id_detenu)
 {
     QSqlQuery query;
