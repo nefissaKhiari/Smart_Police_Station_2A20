@@ -29,6 +29,7 @@ class Equipement
     QSqlQueryModel* afficher();
 
    bool supprimer(int);
+   bool modifier(int,QString,QString,int,int,QString);
 
 private:
     int idEquipement, quantiteEquipement,etatEquipement;

@@ -27,11 +27,13 @@ CONFIG += c++11
 SOURCES += \
     equipement.cpp \
         main.cpp \
+    maintenance.cpp \
         mainwindow.cpp \
     connection.cpp
 
 HEADERS += \
     equipement.h \
+    maintenance.h \
         mainwindow.h \
     connection.h
 

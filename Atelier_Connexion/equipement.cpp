@@ -90,6 +90,24 @@ bool Equipement::supprimer(int idEquipement)
     return ((query.exec()));
 }
 
+bool Equipement::modifier(int idEquipement,QString nomEquipement,QString typeEquipement,int quantiteEquipement,int etatEquipement,QString dateFabrication )
+{
+    QSqlQuery query;
+    QString idEq=QString::number(idEquipement) ;
+    QString qEq=QString::number(quantiteEquipement);
+    QString eEq=QString::number(etatEquipement);
+
+
+    query.prepare("update equipement set idEquipement='"+idEq+"', nomEquipement='"+nomEquipement+"',typeEquipement='"+typeEquipement+"',quantiteEquipement='"+qEq+"',etatEquipement='"+eEq+"',dateFabrication='"+dateFabrication+"' where idEquipement=:idEquipement");
+    query.bindValue(0, idEq);
+    query.bindValue(1, nomEquipement);
+    query.bindValue(2, typeEquipement);
+    query.bindValue(3,qEq );
+    query.bindValue(4, eEq);
+    query.bindValue(5, dateFabrication);
+
+    return query.exec();
+}
 
 
 
