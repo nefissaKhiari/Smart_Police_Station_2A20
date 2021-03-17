@@ -26,7 +26,6 @@ CONFIG += c++11
 
 SOURCES += \
     cellule.cpp \
-    client.cpp \
     detenu.cpp \
         main.cpp \
         mainwindow.cpp \
@@ -34,7 +33,6 @@ SOURCES += \
 
 HEADERS += \
     cellule.h \
-    client.h \
     detenu.h \
         mainwindow.h \
     connection.h

@@ -30,13 +30,17 @@ bool Cellule::ajouter2()
 {
     QSqlQuery query;
   QString id_cellule_string=QString::number(id_cellule);
+  QString nb_lits_string=QString::number(nb_lits);
+  QString sup_cellule=QString::number(superficie_cellule);
+  QString nb_detenus_string=QString::number(nb_detenus);
+
     query.prepare("INSERT INTO cellule (id_cellule, type_cellule,nb_lits,superficie_cellule,nb_detenus) "
                   "VALUES (:id_cellule, :type_cellule,:nb_lits,:superficie_cellule,:nb_detenus)");
     query.bindValue(":id_cellule", id_cellule_string);
     query.bindValue(":type_cellule", type_cellule);
-    query.bindValue(":nb_lits", nb_lits);
-    query.bindValue(":superficie_cellule", superficie_cellule);
-    query.bindValue(":nb_detenus", nb_detenus);
+    query.bindValue(":nb_lits", nb_lits_string);
+    query.bindValue(":superficie_cellule", sup_cellule);
+    query.bindValue(":nb_detenus", nb_detenus_string);
 
     return query.exec();
 
@@ -61,5 +65,23 @@ QSqlQueryModel* Cellule::afficher2()
          model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
          model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
     return model;
+}
+bool Cellule::modifier_cellule(int id_cellule,QString type_cellule,int nb_lits , int superficie_cellule,int nb_detenus )
+{
+    QSqlQuery query;
+    QString id_cellule_string=QString::number(id_cellule) ;
+    QString nb_lits_string=QString::number(nb_lits) ;
+    QString sup_cellule=QString::number(superficie_cellule);
+    QString nb_detenus_string=QString::number(nb_detenus);
+
+
+    query.prepare("update cellule set id_cellule='"+id_cellule_string+"', type_cellule='"+type_cellule+"',nb_lits='"+nb_lits_string+"',superficie_cellule='"+sup_cellule+"',nb_detenus='"+nb_detenus_string+"' where id_cellule=:id_cellule");
+    query.bindValue(0, id_cellule_string);
+    query.bindValue(1, type_cellule);
+    query.bindValue(2, nb_lits_string);
+    query.bindValue(3,sup_cellule );
+    query.bindValue(4, nb_detenus_string);
+
+    return query.exec();
 }
 

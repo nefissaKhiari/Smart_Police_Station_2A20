@@ -80,7 +80,7 @@ void MainWindow::on_pb_modifier_clicked()
 
 
     Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
-     bool test=Det.modifier();
+     bool test=Det.modifier(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu());
      QMessageBox msgBox;
 
      if(test)
@@ -90,6 +90,29 @@ void MainWindow::on_pb_modifier_clicked()
      else
          msgBox.setText("Echec de modification");
      msgBox.exec();
+}
+
+void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
+{
+    QString val=ui->tab_detenu->model()->data(index).toString();
+        QSqlQuery query;
+        query.prepare("select* from detenu where id_detenu='"+val+"' ");
+        if (query.exec())
+        { while(query.next())
+            {
+                ui->le_id->setText(query.value(0).toString());
+                ui->le_nom->setText(query.value(1).toString());
+                ui->le_prenom->setText(query.value(2).toString());
+                ui->la_date->setText(query.value(3).toString());
+                ui->la_nationalite->setText(query.value(4).toString());
+                ui->le_sexe->setText(query.value(5).toString());
+                ui->la_taille->setText(query.value(5).toString());
+                ui->le_poids->setText(query.value(5).toString());
+                ui->la_periode->setText(query.value(5).toString());
+                ui->le_dossier->setText(query.value(5).toString());
+
+              }
+}
 }
 
 void MainWindow::on_pb_ajouter_2_clicked()
@@ -130,3 +153,49 @@ void MainWindow::on_pb_supprimer_2_clicked()
     msgBox.exec();
 }
 
+
+
+
+void MainWindow::on_tab_cellule_activated(const QModelIndex &index)
+{
+    QString val=ui->tab_cellule->model()->data(index).toString();
+        QSqlQuery query;
+        query.prepare("select* from cellule where id_cellule='"+val+"' ");
+        if (query.exec())
+        { while(query.next())
+            {
+                ui->le_id_2->setText(query.value(0).toString());
+                ui->le_type_cellule->setText(query.value(1).toString());
+                ui->le_nb_lits->setText(query.value(2).toString());
+                ui->la_superficie->setText(query.value(3).toString());
+                ui->le_nb_detenus->setText(query.value(4).toString());
+
+              }
+}
+}
+
+
+
+void MainWindow::on_modifier_cellule_clicked()
+{
+    int id_cellule=ui->le_id_2->text().toInt();
+    QString type_cellule=ui->le_nom->text();
+    int nb_lits=ui->le_nb_lits->text().toInt();
+    int superficie_cellule=ui->la_superficie->text().toInt();
+    int nb_detenus=ui->le_nb_detenus->text().toInt();
+
+    Cellule C(id_cellule, type_cellule, nb_lits, superficie_cellule ,  nb_detenus );
+     bool test=C.modifier_cellule(C.getid_cellule(),C.gettype_cellule(),C.getnb_lits(),C.getsuperficie_cellule(),C.getnb_detenus());
+     QMessageBox msgBox;
+
+     if(test)
+        { msgBox.setText("Modification avec succés");
+         ui->tab_cellule->setModel(C.afficher2());
+     }
+     else
+         msgBox.setText("Echec de modification");
+     msgBox.exec();
+
+
+
+}
