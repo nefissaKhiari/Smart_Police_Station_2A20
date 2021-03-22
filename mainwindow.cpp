@@ -5,6 +5,10 @@
 //#include <QDebug>
 #include <QMessageBox>
 #include <QIntValidator>
+#include <QtPrintSupport/QPrinter>
+#include <QPdfWriter>
+#include <QFileDialog>
+#include <QTextDocument>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -101,15 +105,16 @@ void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
         { while(query.next())
             {
                 ui->le_id->setText(query.value(0).toString());
+                ui->le_id_supp->setText(query.value(0).toString());
                 ui->le_nom->setText(query.value(1).toString());
                 ui->le_prenom->setText(query.value(2).toString());
                 ui->la_date->setText(query.value(3).toString());
                 ui->la_nationalite->setText(query.value(4).toString());
                 ui->le_sexe->setText(query.value(5).toString());
-                ui->la_taille->setText(query.value(5).toString());
-                ui->le_poids->setText(query.value(5).toString());
-                ui->la_periode->setText(query.value(5).toString());
-                ui->le_dossier->setText(query.value(5).toString());
+                ui->la_taille->setText(query.value(6).toString());
+                ui->le_poids->setText(query.value(7).toString());
+                ui->la_periode->setText(query.value(8).toString());
+                ui->le_dossier->setText(query.value(9).toString());
 
               }
 }
@@ -165,6 +170,7 @@ void MainWindow::on_tab_cellule_activated(const QModelIndex &index)
         { while(query.next())
             {
                 ui->le_id_2->setText(query.value(0).toString());
+                ui->le_id_supp_2->setText(query.value(0).toString());
                 ui->le_type_cellule->setText(query.value(1).toString());
                 ui->le_nb_lits->setText(query.value(2).toString());
                 ui->la_superficie->setText(query.value(3).toString());
@@ -198,4 +204,68 @@ void MainWindow::on_modifier_cellule_clicked()
 
 
 
+}
+
+/*void MainWindow::on_pushButton_6_clicked()
+{
+    ui->tab_cellule->setModel(tmpcellule.tri_cellule());
+    ui->tab_cellule->setModel(tmpcellule.tri_cellule());//refresh
+}*/
+
+/*void MainWindow::on_pdf_detenu_clicked()
+{
+    QString str;
+        str.append("<html><head></head><body><center>"+QString("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;<font size=""10"" color =""red""> GESTION DES PRODUITS </font><br /> <br /> "));
+        str.append("<table border=1><tr>");
+        str.append("<td>"+QString("  ")+"&nbsp;&nbsp;<font color =""blue""  size=""10"">IDP</font>&nbsp;&nbsp;"+"</td>");
+        str.append("<td>"+QString("&nbsp;&nbsp;<font color =""blue""  size=""10"">Nom </font>&nbsp;&nbsp;")+"</td>");
+        str.append("<td>"+QString("&nbsp;&nbsp;<font color =""blue""  size=""10"">Quantité</font>&nbsp;&nbsp;")+"</td>");
+
+
+        QSqlQuery * query=new QSqlQuery();
+        query->exec("SELECT * FROM detenu");
+        while(query->next())
+        {
+            str.append("<tr><td>");
+            str.append("&nbsp;&nbsp;<font color =""green"" size= ""10"">"+query->value(0).toString()+"&nbsp;&nbsp;");
+            str.append("</td><td>");
+            str.append("&nbsp;&nbsp;<font color =""green""  size=""10"">"+query->value(1).toString()+"&nbsp;&nbsp;");
+            str.append("</td><td>");
+            str.append("&nbsp;&nbsp;<font color =""green"" size=""10"">"+query->value(2).toString()+"&nbsp;&nbsp;");
+             str.append("</td><td>");
+            str.append("&nbsp;&nbsp;<font color =""green"" size= ""10"">"+query->value(3).toString()+"&nbsp;&nbsp;");
+            str.append("</td><td>");
+            str.append("&nbsp;&nbsp;<font color =""green""  size=""10"">"+query->value(4).toString()+"&nbsp;&nbsp;");
+            str.append("</td><td>");
+            str.append("&nbsp;&nbsp;<font color =""green"" size=""10"">"+query->value(5).toString()+"&nbsp;&nbsp;");
+            str.append("</td></tr>");
+
+    }
+
+        str.append("</table></center><body></html>");
+
+        QPrinter printer;
+        printer.setOrientation(QPrinter::Portrait);
+        printer.setOutputFormat(QPrinter::PdfFormat);
+        printer.setPaperSize(QPrinter::A4);
+
+        QString path= QFileDialog::getSaveFileName(NULL,"imprimer","gestion des detenus","PDF(*.pdf");
+         if(path.isEmpty()) return;
+         printer.setOutputFileName(path);
+         QTextDocument doc;
+         doc.setHtml(str);
+         doc.print(&printer);
+}*/
+
+void MainWindow::on_pb_trier_cellule_clicked()
+{
+      ui->tab_cellule->setModel(tmpcellule.tri_cellule());
+       ui->tab_cellule->setModel(tmpcellule.tri_cellule());//refresh
+}
+
+void MainWindow::on_pb_rechercher_cellule_clicked()
+{
+    QString res=ui->recher_cellule->text();
+
+        ui->tab_cellule->setModel(tmpcellule.rechercher_cellule(res));
 }

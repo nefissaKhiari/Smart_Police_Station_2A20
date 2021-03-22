@@ -27,6 +27,8 @@ public:
     QSqlQueryModel* afficher2();
     bool supprimer2(int);
     bool modifier_cellule(int,QString,int,int,int);
+    QSqlQueryModel * tri_cellule() ;
+    QSqlQueryModel * rechercher_cellule(QString);
 private:
         int id_cellule,nb_lits,superficie_cellule,nb_detenus;
         QString type_cellule;

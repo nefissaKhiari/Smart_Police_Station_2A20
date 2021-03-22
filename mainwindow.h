@@ -2,12 +2,17 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+//#include <QtTextToSpeech/QTextToSpeech>
+//#include <QMediaPlayer>
 #include "detenu.h"
 #include "cellule.h"
+
+//QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
 }
-
+//QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -34,9 +39,22 @@ private slots:
 
     void on_modifier_cellule_clicked();
 
+    void on_pushButton_6_clicked();
+
+    void on_pdf_detenu_clicked();
+
+    void on_pb_trier_cellule_clicked();
+
+    void on_pb_rechercher_cellule_clicked();
+
 private:
     Ui::MainWindow *ui;
    Detenu D;
+  // QMediaPlayer * erreur = new QMediaPlayer ;
+       Cellule tmpcellule;
+       /* QTimer *delay;
+       QTextToSpeech *speech;
+       QStringList allTextList;*/
 };
 
 #endif // MAINWINDOW_H

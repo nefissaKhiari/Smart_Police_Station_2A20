@@ -2,6 +2,8 @@
 #include <QSqlQuery>
 #include <QtDebug>
 #include <QObject>
+#include <QtPrintSupport/QPrinter>
+#include <QPdfWriter>
 Detenu::Detenu()
 {
 id_detenu=0;
