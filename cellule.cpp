@@ -26,6 +26,7 @@ void Cellule::setsuperficie_cellule(int superficie_cellule){this->superficie_cel
 void Cellule::setnb_lits(int nb_lits){this->nb_lits=nb_lits;}
 void Cellule::setnb_detenus(int nb_detenus){this->nb_detenus=nb_detenus;}
 
+
 bool Cellule::ajouter2()
 {
     QSqlQuery query;
@@ -50,8 +51,7 @@ bool Cellule::supprimer2(int id_cellule)
 {
     QSqlQuery query;
     query.prepare("Delete from Cellule where id_cellule= :id_cellule");
-    query.bindValue(":id_cellule", id_cellule);
-
+    query.bindValue(id_cellule, id_cellule);
     return query.exec();
 }
 QSqlQueryModel* Cellule::afficher2()
@@ -83,5 +83,29 @@ bool Cellule::modifier_cellule(int id_cellule,QString type_cellule,int nb_lits ,
     query.bindValue(4, nb_detenus_string);
 
     return query.exec();
+}
+
+QSqlQueryModel * Cellule::tri_cellule()
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("select * from cellule order by nb_detenus asc;");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Id cellule"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type cellule"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nb lits"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
+        return model;
+}
+
+QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("select * from cellule where id_cellule='"+rech+"' ");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("Id cellule"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type cellule"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nb lits"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
+        return model;
 }
 
