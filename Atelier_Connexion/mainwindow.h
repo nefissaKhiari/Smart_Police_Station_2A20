@@ -1,6 +1,7 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 #include "equipement.h"
+#include "maintenance.h"
 #include <QMainWindow>
 //test git
 namespace Ui {
@@ -33,6 +34,7 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Equipement E,E1;
+    Maintenance M;
 };
 
 #endif // MAINWINDOW_H

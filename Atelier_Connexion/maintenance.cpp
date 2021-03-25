@@ -4,45 +4,45 @@
 #include <QString>
 #include <QObject>
 
-maintenance::maintenance()
+Maintenance::Maintenance()
 {
  idMaintenance=0;frais=0;
 }
-maintenance::maintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais)
+Maintenance::Maintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais)
 { this->idMaintenance=idMaintenance;
   this->dureeMaintenance=dureeMaintenance;
   this->dateEntreeM=dateEntreeM;
   this->dateSortieM=dateSortieM;
   this->frais=frais;
 }
-int maintenance:: getIdMaintenance()
+int Maintenance:: getIdMaintenance()
 {return idMaintenance ;}
-QString maintenance:: getDureeMaintenance()
+QString Maintenance:: getDureeMaintenance()
 {return dureeMaintenance ;}
-QString maintenance:: getDateEntreeM()
+QString Maintenance:: getDateEntreeM()
 {return dateEntreeM;}
-QString maintenance:: getDateSortieM()
+QString Maintenance:: getDateSortieM()
 {return dateSortieM ;}
-int maintenance:: getFraisMaintenance()
+int Maintenance:: getFraisMaintenance()
 {return frais;}
 
-void maintenance::setIdMaintenance(int idMaintenance)
+void Maintenance::setIdMaintenance(int idMaintenance)
 {this->idMaintenance=idMaintenance;}
 
-void maintenance::setDureeMaintenance(QString dureeMaintenance)
+void Maintenance::setDureeMaintenance(QString dureeMaintenance)
 {this->dureeMaintenance=dureeMaintenance ;}
 
-void maintenance::setDateEntreeM(QString dateEntreeM)
+void Maintenance::setDateEntreeM(QString dateEntreeM)
 {  this->dateEntreeM=dateEntreeM;}
 
-void maintenance::setDateSortieM(QString dateSortieM)
+void Maintenance::setDateSortieM(QString dateSortieM)
 {this->dateSortieM=dateSortieM;}
 
-void maintenance::setFraisMaintenance(int frais)
+void Maintenance::setFraisMaintenance(int frais)
 {this->frais=frais;}
 
 
-bool maintenance::ajouterMaintenance()
+bool Maintenance::ajouterMaintenance()
 {
    QSqlQuery query;
 
@@ -62,7 +62,7 @@ bool maintenance::ajouterMaintenance()
 
 }
 
-QSqlQueryModel* maintenance::afficherMaintenance()
+QSqlQueryModel* Maintenance::afficherMaintenance()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
 
@@ -81,7 +81,7 @@ QSqlQueryModel* maintenance::afficherMaintenance()
 
 }
 
-bool maintenance::supprimerMaintenance(int idMaintenance)
+bool Maintenance::supprimerMaintenance(int idMaintenance)
 {
     QSqlQuery query;
     query.prepare("Delete from maintenance where idMaintenance= :idMaintenance");//preparer la req

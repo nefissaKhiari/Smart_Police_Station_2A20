@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->tab_equipement->setModel(E.afficher());
+   // ui->tab_equipement->setModel(E.afficher());
 }
 
 MainWindow::~MainWindow()
@@ -88,20 +89,20 @@ void MainWindow::on_pb_modifier_clicked()
 
 void MainWindow::on_pb_ajouterMaintenance_clicked()
 {
-    int idEquipement=ui->le_id->text().toInt();
-        int quantiteEquipement=ui->la_quantite->text().toInt();
-        int etatEquipement=ui->le_etat->text().toInt();
-        QString nomEquipement=ui->le_nom->text();
-        QString typeEquipement=ui->le_type->text();
-        QString dateFabrication=ui->la_date->text();
+    int idMaintenance=ui->id_maintenance->text().toInt();
+        int frais=ui->frais_maintenance->text().toInt();
 
-        Equipement E(idEquipement,quantiteEquipement,etatEquipement,nomEquipement,typeEquipement,dateFabrication);
-        bool test=E.ajouterEquipement();
+   QString dureeMaintenance=ui->duree_maintenance->text();
+   QString dateEntreeM=ui->date_entree_maintenance->text();
+   QString dateSortieM=ui->date_sortie_maintenance->text();
+
+        Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+        bool test=M.ajouterMaintenance();
         QMessageBox msgBox;
 
             if(test)
                { msgBox.setText("Ajout avec succés");
-                ui->tab_equipement->setModel(E.afficher());
+                ui->tab_maintenance->setModel(M.afficherMaintenance());
             }
             else
                 msgBox.setText("Echec d'e suppression'ajout");
@@ -117,6 +118,7 @@ void MainWindow::on_tab_equipement_activated(const QModelIndex &index)
     { while(query.next())
         {
             ui->le_id->setText(query.value(0).toString());
+            ui->le_id_supp->setText(query.value(0).toString());
             ui->le_nom->setText(query.value(1).toString());
             ui->le_type->setText(query.value(2).toString());
             ui->la_quantite->setText(query.value(3).toString());

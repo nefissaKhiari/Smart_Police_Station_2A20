@@ -6,11 +6,11 @@
 #include<QString>
 #include <qsqlquerymodel.h>
 
-class maintenance
+class Maintenance
 {
 public:
-    maintenance();
-     maintenance(int,QString,QString,QString,int);
+    Maintenance();
+     Maintenance(int,QString,QString,QString,int);
      int getIdMaintenance();
      QString getDureeMaintenance();
      QString getDateEntreeM();
