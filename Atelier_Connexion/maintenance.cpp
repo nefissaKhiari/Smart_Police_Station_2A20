@@ -2,7 +2,7 @@
 #include<QSqlQuery>
 #include<QtDebug>
 #include <QString>
-#include <QObject>
+ #include <QObject>
 
 Maintenance::Maintenance()
 {

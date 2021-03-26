@@ -10,7 +10,7 @@ class Maintenance
 {
 public:
     Maintenance();
-     Maintenance(int,QString,QString,QString,int);
+    Maintenance(int,QString,QString,QString,int);
      int getIdMaintenance();
      QString getDureeMaintenance();
      QString getDateEntreeM();

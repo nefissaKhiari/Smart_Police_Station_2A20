@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QIntValidator>
-MainWindow::MainWindow(QWidget *parent) :
+ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
