@@ -1,4 +1,4 @@
-#ifndef EQUIPEMENT_H
+ #ifndef EQUIPEMENT_H
 #define EQUIPEMENT_H
 #include <QSqlDatabase>
 #include <QSqlError>

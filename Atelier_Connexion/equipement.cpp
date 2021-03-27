@@ -1,4 +1,4 @@
-#include "equipement.h"
+ #include "equipement.h"
 #include<QSqlQuery>
 #include<QtDebug>
 #include <QString>

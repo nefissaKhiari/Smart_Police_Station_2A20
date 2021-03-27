@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+ #include "mainwindow.h"
 #include "equipement.h"
 #include "ui_mainwindow.h"
 #include <QDebug>

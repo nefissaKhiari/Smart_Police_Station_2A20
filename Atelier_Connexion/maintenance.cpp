@@ -1,7 +1,7 @@
 #include "maintenance.h"
 #include<QSqlQuery>
 #include<QtDebug>
-#include <QString>
+ #include <QString>
  #include <QObject>
 
 Maintenance::Maintenance()
@@ -92,6 +92,24 @@ bool Maintenance::supprimerMaintenance(int idMaintenance)
 
 
 
+bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais )
+{
+    QSqlQuery query;
+    QString idEq=QString::number(idMaintenance) ;
+    QString qEq=QString::number(frais);
+
+
+
+    query.prepare("update maintenance set idEquipement='"+idEq+"', nomEquipement='"+nomEquipement+"',typeEquipement='"+typeEquipement+"',quantiteEquipement='"+qEq+"',etatEquipement='"+eEq+"',dateFabrication='"+dateFabrication+"' where idEquipement=:idEquipement");
+    query.bindValue(0, idEq);
+    query.bindValue(1, nomEquipement);
+    query.bindValue(2, typeEquipement);
+    query.bindValue(3,qEq );
+    query.bindValue(4, eEq);
+    query.bindValue(5, dateFabrication);
+
+    return query.exec();
+}
 
 
 
