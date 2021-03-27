@@ -108,6 +108,32 @@ bool Equipement::modifier(int idEquipement,QString nomEquipement,QString typeEqu
 
     return query.exec();
 }
+QSqlQueryModel* Equipement::tri_quantite()// triii
+{
+    QSqlQueryModel* model=new QSqlQueryModel() ;
+    QSqlQuery *query=new QSqlQuery;
+    query->prepare("select * from equipement ORDER BY quantiteEquipement") ;
+    query->exec() ;
+    model->setQuery(*query) ;
+
+
+
+    return model;
+
+}
+QSqlQueryModel* Equipement::tri_etat()// tri
+{
+    QSqlQueryModel* model=new QSqlQueryModel() ;
+    QSqlQuery *query=new QSqlQuery;
+    query->prepare("select * from equipement ORDER BY etatEquipement") ;
+    query->exec() ;
+    model->setQuery(*query) ;
+
+
+
+    return model;
+
+}
 
 
 

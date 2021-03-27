@@ -92,7 +92,7 @@ bool Maintenance::supprimerMaintenance(int idMaintenance)
 
 
 
-bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais )
+/*bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais )
 {
     QSqlQuery query;
     QString idEq=QString::number(idMaintenance) ;
@@ -110,6 +110,6 @@ bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance
 
     return query.exec();
 }
-
+*/
 
 

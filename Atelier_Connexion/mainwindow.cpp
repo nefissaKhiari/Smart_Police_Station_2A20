@@ -128,3 +128,19 @@ void MainWindow::on_tab_equipement_activated(const QModelIndex &index)
 
      }
 }
+
+
+
+void MainWindow::on_trier_clicked()
+{
+    QString type = ui->comboBox_equipement->currentText();
+    if (type == "etatEquipement")
+    {
+        ui->tab_equipement->setModel(E.tri_etat());
+    }else if (type == "quantiteEquipement")
+    {
+        ui->tab_equipement->setModel(E.tri_quantite());
+
+}
+
+}
