@@ -144,3 +144,16 @@ void MainWindow::on_trier_clicked()
 }
 
 }
+
+
+
+
+
+
+void MainWindow::on_pushButton_rechercher_clicked()
+{
+    QString res=ui->rech_equipement->text();
+
+           ui->tab_equipement->setModel(E.rechercherEquipement(res));
+
+}

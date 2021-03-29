@@ -34,7 +34,7 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>20</y>
+        <y>10</y>
         <width>721</width>
         <height>421</height>
        </rect>
@@ -206,8 +206,8 @@
       <widget class="QPushButton" name="pb_supprimer">
        <property name="geometry">
         <rect>
-         <x>570</x>
-         <y>220</y>
+         <x>390</x>
+         <y>120</y>
          <width>93</width>
          <height>28</height>
         </rect>
@@ -219,8 +219,8 @@
       <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
-         <x>520</x>
-         <y>160</y>
+         <x>340</x>
+         <y>90</y>
          <width>55</width>
          <height>16</height>
         </rect>
@@ -232,8 +232,8 @@
       <widget class="QLineEdit" name="le_id_supp">
        <property name="geometry">
         <rect>
-         <x>550</x>
-         <y>160</y>
+         <x>370</x>
+         <y>90</y>
          <width>113</width>
          <height>22</height>
         </rect>
@@ -242,7 +242,7 @@
       <widget class="QPushButton" name="pb_modifier">
        <property name="geometry">
         <rect>
-         <x>390</x>
+         <x>230</x>
          <y>220</y>
          <width>93</width>
          <height>28</height>
@@ -255,7 +255,7 @@
       <widget class="QComboBox" name="comboBox_equipement">
        <property name="geometry">
         <rect>
-         <x>300</x>
+         <x>470</x>
          <y>220</y>
          <width>73</width>
          <height>22</height>
@@ -275,7 +275,7 @@
       <widget class="QPushButton" name="trier">
        <property name="geometry">
         <rect>
-         <x>250</x>
+         <x>420</x>
          <y>190</y>
          <width>121</width>
          <height>28</height>
@@ -283,6 +283,29 @@
        </property>
        <property name="text">
         <string>Trier_Equipement</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="rech_equipement">
+       <property name="geometry">
+        <rect>
+         <x>570</x>
+         <y>190</y>
+         <width>113</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_rechercher">
+       <property name="geometry">
+        <rect>
+         <x>590</x>
+         <y>220</y>
+         <width>93</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>rechercher</string>
        </property>
       </widget>
      </widget>

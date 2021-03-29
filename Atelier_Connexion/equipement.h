@@ -30,8 +30,9 @@ class Equipement
 
    bool supprimer(int);
    bool modifier(int,QString,QString,int,int,QString);
-   QSqlQueryModel* tri_etat() ;
+   QSqlQueryModel * tri_etat() ;
    QSqlQueryModel *tri_quantite();
+   QSqlQueryModel *rechercherEquipement(QString);
 
 private:
     int idEquipement, quantiteEquipement,etatEquipement;

@@ -35,6 +35,8 @@ private slots:
 
     void on_trier_clicked();
 
+    void on_pushButton_rechercher_clicked();
+
 private:
     Ui::MainWindow *ui;
     Equipement E,E1;

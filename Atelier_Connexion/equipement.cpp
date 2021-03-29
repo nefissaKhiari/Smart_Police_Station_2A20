@@ -134,6 +134,18 @@ QSqlQueryModel* Equipement::tri_etat()// tri
     return model;
 
 }
+QSqlQueryModel * Equipement::rechercherEquipement(QString rech)
+{
+    QSqlQueryModel * model= new QSqlQueryModel();
+    model->setQuery("select * from equipement where idEquipement='"+rech+"' ");
+    model->setHeaderData(0, Qt::Horizontal, QObject::tr("identifiant"));
+    model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
+    model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
+    model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantité"));
+    model->setHeaderData(4, Qt::Horizontal, QObject::tr("Etat"));
+    model->setHeaderData(5, Qt::Horizontal, QObject::tr("DateFabrication"));
+        return model;
+}
 
 
 
