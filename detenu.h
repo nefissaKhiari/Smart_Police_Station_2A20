@@ -33,10 +33,10 @@ public:
      void setperiode_detenu(QString);
      void setdossier_detenu(QString);
 
-     bool ajouter();
-     QSqlQueryModel* afficher();
-     bool supprimer(int);
-      bool modifier(int,QString,QString,QString,QString,QString,int,int,QString,QString);
+     bool ajouter_detenu();
+     QSqlQueryModel* afficher_detenu();
+     bool supprimer_detenu(int);
+      bool modifier_detenu(int,QString,QString,QString,QString,QString,int,int,QString,QString);
 private:
         int id_detenu;
         QString nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,periode_detenu,dossier_detenu;

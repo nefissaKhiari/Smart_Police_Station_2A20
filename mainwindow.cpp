@@ -2,21 +2,30 @@
 #include "detenu.h"
 #include "cellule.h"
 #include "ui_mainwindow.h"
-//#include <QDebug>
-#include <QMessageBox>
+#include <QDebug>
 #include <QIntValidator>
-#include <QtPrintSupport/QPrinter>
-#include <QPdfWriter>
-#include <QFileDialog>
-#include <QTextDocument>
+#include <QMessageBox>
+#include<QPrinter>
+#include<QPrintDialog>
+#include<QPdfWriter>
+#include<QPainter>
+#include<QDesktopServices>
+#include<QUrl>
+#include <QtWidgets>
+
+//#include <QUrDesktopServices>
+#include "stats.h"
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   ui->le_id->setValidator( new QIntValidator(0, 9999999, this));
-   ui->tab_detenu->setModel(D.afficher());
+   ui->le_id->setValidator( new QIntValidator(0, 999, this));
+   ui->tab_detenu->setModel(D.afficher_detenu());
+
 }
+
 
 MainWindow::~MainWindow()
 {
@@ -41,12 +50,12 @@ void MainWindow::on_pb_ajouter_clicked()
 
 
     Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
-    bool test=D.ajouter();
+    bool test=D.ajouter_detenu();
     QMessageBox msgBox;
 
     if(test)
        { msgBox.setText("Ajout avec succés");
-        ui->tab_detenu->setModel(D.afficher());
+        ui->tab_detenu->setModel(D.afficher_detenu());
     }
     else
         msgBox.setText("Echec d'ajout");
@@ -55,13 +64,13 @@ void MainWindow::on_pb_ajouter_clicked()
 
 void MainWindow::on_pb_supprimer_clicked()
 {
-    Detenu D1; D1.setid_detenu(ui->le_id_supp->text().toInt());
-    bool test=D1.supprimer(D1.getid_detenu());
+    Detenu D1; D1.setid_detenu(ui->le_id->text().toInt());
+    bool test=D1.supprimer_detenu(D1.getid_detenu());
     QMessageBox msgBox;
 
     if(test)
        { msgBox.setText("Supprimer avec succés");
-     ui->tab_detenu->setModel(D.afficher());
+     ui->tab_detenu->setModel(D.afficher_detenu());
     }
     else
         msgBox.setText("Echec de suppression");
@@ -84,12 +93,12 @@ void MainWindow::on_pb_modifier_clicked()
 
 
     Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
-     bool test=Det.modifier(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu());
+     bool test=Det.modifier_detenu(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu());
      QMessageBox msgBox;
 
      if(test)
         { msgBox.setText("Modification avec succés");
-         ui->tab_detenu->setModel(Det.afficher());
+         ui->tab_detenu->setModel(Det.afficher_detenu());
      }
      else
          msgBox.setText("Echec de modification");
@@ -105,7 +114,7 @@ void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
         { while(query.next())
             {
                 ui->le_id->setText(query.value(0).toString());
-                ui->le_id_supp->setText(query.value(0).toString());
+                ui->le_id->setText(query.value(0).toString());//suppression
                 ui->le_nom->setText(query.value(1).toString());
                 ui->le_prenom->setText(query.value(2).toString());
                 ui->la_date->setText(query.value(3).toString());
@@ -145,7 +154,7 @@ void MainWindow::on_pb_ajouter_2_clicked()
 
 void MainWindow::on_pb_supprimer_2_clicked()
 {
-    Cellule C1; C1.setid_cellule(ui->le_id_supp_2->text().toInt());
+    Cellule C1; C1.setid_cellule(ui->le_id_2->text().toInt());
     bool test=C1.supprimer2(C1.getid_cellule());
     QMessageBox msgBox;
 
@@ -170,7 +179,7 @@ void MainWindow::on_tab_cellule_activated(const QModelIndex &index)
         { while(query.next())
             {
                 ui->le_id_2->setText(query.value(0).toString());
-                ui->le_id_supp_2->setText(query.value(0).toString());
+                ui->le_id_2->setText(query.value(0).toString());//suppression
                 ui->le_type_cellule->setText(query.value(1).toString());
                 ui->le_nb_lits->setText(query.value(2).toString());
                 ui->la_superficie->setText(query.value(3).toString());
@@ -212,60 +221,117 @@ void MainWindow::on_modifier_cellule_clicked()
     ui->tab_cellule->setModel(tmpcellule.tri_cellule());//refresh
 }*/
 
-/*void MainWindow::on_pdf_detenu_clicked()
+void MainWindow::on_pdf_detenu_clicked()
 {
-    QString str;
-        str.append("<html><head></head><body><center>"+QString("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;;<font size=""10"" color =""red""> GESTION DES PRODUITS </font><br /> <br /> "));
-        str.append("<table border=1><tr>");
-        str.append("<td>"+QString("  ")+"&nbsp;&nbsp;<font color =""blue""  size=""10"">IDP</font>&nbsp;&nbsp;"+"</td>");
-        str.append("<td>"+QString("&nbsp;&nbsp;<font color =""blue""  size=""10"">Nom </font>&nbsp;&nbsp;")+"</td>");
-        str.append("<td>"+QString("&nbsp;&nbsp;<font color =""blue""  size=""10"">Quantité</font>&nbsp;&nbsp;")+"</td>");
 
+    //QDateTime datecreation = date.currentDateTime();
+                       //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+                              QPdfWriter pdf("C:/Users/ASUS/Desktop/pdf detenu.pdf");
+                              QPainter painter(&pdf);
+                             int i = 4000;
+                                  painter.setPen(Qt::red);
+                                  painter.setFont(QFont("Arial Black", 30));
+                                  painter.drawText(1500,1200," Tableau de Detenu");
+                                  painter.setPen(Qt::black);
+                                  painter.setFont(QFont("Arial", 50));
+                                 // painter.drawText(1100,2000,afficheDC);
+                                 //painter.drawRect(100,100,100,100);
+                                    painter.drawRect(200,100,7700,2100);
+                                  //painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/RH/Desktop/projecpp/image/logopdf.png"));
+                                  painter.drawRect(0,3000,9600,500);
+                                  painter.setFont(QFont("Arial", 9));
+                                  painter.drawText(200,3300,"Id");
+                                  painter.drawText(1200,3300,"Nom");
+                                  painter.drawText(2400,3300,"Prenom");
+                                  painter.drawText(3400,3300,"Date naissance");
+                                  painter.drawText(4600,3300,"Nationalite");
+                                  painter.drawText(5600,3300,"Sexe");
+                                  painter.drawText(6200,3300,"Taille");
+                                  painter.drawText(7100,3300,"Poids");
+                                  painter.drawText(8000,3300,"Periode");
+                                  painter.drawText(9000,3300,"Dossier");
 
-        QSqlQuery * query=new QSqlQuery();
-        query->exec("SELECT * FROM detenu");
-        while(query->next())
-        {
-            str.append("<tr><td>");
-            str.append("&nbsp;&nbsp;<font color =""green"" size= ""10"">"+query->value(0).toString()+"&nbsp;&nbsp;");
-            str.append("</td><td>");
-            str.append("&nbsp;&nbsp;<font color =""green""  size=""10"">"+query->value(1).toString()+"&nbsp;&nbsp;");
-            str.append("</td><td>");
-            str.append("&nbsp;&nbsp;<font color =""green"" size=""10"">"+query->value(2).toString()+"&nbsp;&nbsp;");
-             str.append("</td><td>");
-            str.append("&nbsp;&nbsp;<font color =""green"" size= ""10"">"+query->value(3).toString()+"&nbsp;&nbsp;");
-            str.append("</td><td>");
-            str.append("&nbsp;&nbsp;<font color =""green""  size=""10"">"+query->value(4).toString()+"&nbsp;&nbsp;");
-            str.append("</td><td>");
-            str.append("&nbsp;&nbsp;<font color =""green"" size=""10"">"+query->value(5).toString()+"&nbsp;&nbsp;");
-            str.append("</td></tr>");
+                                  QSqlQuery query;
+                                  query.prepare("select * from detenu");
+                                  query.exec();
+                                  while (query.next())
+                                  {
+                                      painter.drawText(200,i,query.value(0).toString());
+                                      painter.drawText(1200,i,query.value(1).toString());
+                                      painter.drawText(2400,i,query.value(2).toString());
+                                      painter.drawText(3400,i,query.value(3).toString());
+                                      painter.drawText(4600,i,query.value(4).toString());
+                                     painter.drawText(5600,i,query.value(5).toString());
+                                      painter.drawText(6200,i,query.value(6).toString());
+                                      painter.drawText(7100,i,query.value(7).toString());
+                                      painter.drawText(8000,i,query.value(8).toString());
+                                      painter.drawText(9000,i,query.value(8).toString());
 
-    }
-
-        str.append("</table></center><body></html>");
-
-        QPrinter printer;
-        printer.setOrientation(QPrinter::Portrait);
-        printer.setOutputFormat(QPrinter::PdfFormat);
-        printer.setPaperSize(QPrinter::A4);
-
-        QString path= QFileDialog::getSaveFileName(NULL,"imprimer","gestion des detenus","PDF(*.pdf");
-         if(path.isEmpty()) return;
-         printer.setOutputFileName(path);
-         QTextDocument doc;
-         doc.setHtml(str);
-         doc.print(&printer);
-}*/
+                                    i = i + 500;
+                                  }
+                                  int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                                      if (reponse == QMessageBox::Yes)
+                                      {
+                                          QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/ASUS/Desktop/pdf detenu.pdf"));
+                                      }
+                                      if (reponse == QMessageBox::No)
+                                      {
+                                           painter.end();
+                                      }
+}
 
 void MainWindow::on_pb_trier_cellule_clicked()
 {
-      ui->tab_cellule->setModel(tmpcellule.tri_cellule());
-       ui->tab_cellule->setModel(tmpcellule.tri_cellule());//refresh
+    QString type = ui->comboBox_cellule->currentText();
+        if (type == "nb_detenus")
+        {
+            ui->tab_cellule->setModel(tmpcellule.tri_nb_detenus());
+        }else if (type == "id_cellule")
+        {
+            ui->tab_cellule->setModel(tmpcellule.tri_id_cellule());
+}else if (type == "nb_lits")
+        {
+            ui->tab_cellule->setModel(tmpcellule.tri_nb_lits());
 }
-
-void MainWindow::on_pb_rechercher_cellule_clicked()
+}
+/*void MainWindow::on_pb_rechercher_cellule_clicked()
 {
-    QString res=ui->recher_cellule->text();
+    QString type = ui->comboBox_recherche->currentText();
+        QString valeur = ui->recher_cellule->currentText();
+        bool test = false, test1 = false, test2 = false;
+        if (type == "id_cellule")
+            test = tmpcellule.recherche_id_cellule(valeur);
+        else if (type == "type_cellule")
+            test1 = tmpcellule.recherche_type_cellule(valeur);
+        else if (type == "nb_detenus")
+            test2 = tmpcellule.recherche_nb_detenus(valeur);
 
-        ui->tab_cellule->setModel(tmpcellule.rechercher_cellule(res));
+        if (test || test1 || test2)
+        {
+            int id_cellule = tmpcellule.getid_cellule();
+            QString type_cellule = tmpcellule.gettype_cellule();
+            int nb_lits = tmpcellule.getnb_detenus();
+            int superficie_cellule = tmpcellule.getsuperficie_cellule();
+            int nb_detenus = tmpcellule.getnb_detenus();
+
+            ui->recher_cellule->setCurrentText(id_cellule);
+            ui->comboBox_mail_4->setCurrentText(email);
+            ui->comboBox_film_3->setCurrentText(film);
+            ui->spinBox_quantite_4->setValue(quantite);
+            ui->spinBox_remise_3->setValue(remise);
+            ui->comboBox_salle_3->setCurrentText(salle);
+            ui->sieges_3->setText(siege);
+            ui->spinBox_prix_3->setValue(prix);
+            ui->dateEdit_billet->setDate(QDate::fromString(date,"MM/dd/yyyy"));
+            ui->timeEdit_billet->setTime(QTime::fromString(heure,"hh:mm"));
+            ui->comboBox_tarif_3->setCurrentText(tarif);
+        }
+    }
+*/
+
+void MainWindow::on_pushButton_clicked()
+{
+    stats stat;
+    stat.setModal(true);
+    stat.exec();
 }

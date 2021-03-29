@@ -4,9 +4,14 @@
 #
 #-------------------------------------------------
 
-QT       += core gui sql
-CONFIG+=console
+QT       += core gui sql printsupport
+QT       += core gui network charts
+#QT       += pdf
+#QT += gui
+QT       += printsupport multimedia texttospeech
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
+CONFIG += c++11
+
 
 TARGET = Atelier_Connexion
 TEMPLATE = app
@@ -29,16 +34,19 @@ SOURCES += \
     detenu.cpp \
         main.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    stats.cpp
 
 HEADERS += \
     cellule.h \
     detenu.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    stats.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        stats.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
