@@ -85,6 +85,46 @@ bool Cellule::modifier_cellule(int id_cellule,QString type_cellule,int nb_lits ,
     return query.exec();
 }
 
+QSqlQueryModel* Cellule::tri_nb_detenus()// triii
+{
+    QSqlQueryModel* model=new QSqlQueryModel() ;
+    QSqlQuery *query=new QSqlQuery;
+    query->prepare("select * from cellule order by nb_detenus asc") ;
+    query->exec() ;
+    model->setQuery(*query) ;
+
+
+
+    return model;
+
+}
+QSqlQueryModel* Cellule::tri_id_cellule()// triii
+{
+    QSqlQueryModel* model=new QSqlQueryModel() ;
+    QSqlQuery *query=new QSqlQuery;
+    query->prepare("select * from cellule order by id_cellule asc") ;
+    query->exec() ;
+    model->setQuery(*query) ;
+
+
+
+    return model;
+
+}
+QSqlQueryModel* Cellule::tri_nb_lits()// triii
+{
+    QSqlQueryModel* model=new QSqlQueryModel() ;
+    QSqlQuery *query=new QSqlQuery;
+    query->prepare("select * from cellule order by nb_lits asc") ;
+    query->exec() ;
+    model->setQuery(*query) ;
+
+
+
+    return model;
+
+}
+/*
 QSqlQueryModel * Cellule::tri_cellule()
 {
     QSqlQueryModel * model= new QSqlQueryModel();
@@ -95,9 +135,9 @@ QSqlQueryModel * Cellule::tri_cellule()
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
         return model;
-}
+}*/
 
-QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
+/*QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
     model->setQuery("select * from cellule where id_cellule='"+rech+"' ");
@@ -107,5 +147,72 @@ QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
         return model;
+}*/
+
+bool Cellule::recherche_id_cellule(QString valeur)
+{
+    QSqlQuery query;
+
+    query.prepare("Select * from cellule id_cellule=:id_cellule");
+    query.bindValue(":id_cellule",valeur);
+    if (query.exec())
+    {
+        while (query.next()){
+
+            //            qDebug()<<"find";
+            this -> id_cellule = (query.value(0).toInt());
+            this -> type_cellule = (query.value(1).toString());
+            this -> nb_lits =(query.value(2).toInt());
+            this -> superficie_cellule = (query.value(3).toInt());
+            this -> nb_detenus = (query.value(4).toInt());
+
+        }
+
+    }
+    return query.exec();
+}
+
+bool Cellule::recherche_type_cellule(QString valeur)
+{
+    QSqlQuery query;
+
+    query.prepare("Select * from cellule where type_cellule=:type_cellule");
+    query.bindValue(":type_cellule",valeur);
+    if (query.exec())
+    {
+        while (query.next()){
+
+            //            qDebug()<<"find";
+            this -> id_cellule = (query.value(0).toInt());
+            this -> type_cellule = (query.value(1).toString());
+            this -> nb_lits =(query.value(2).toInt());
+            this -> superficie_cellule = (query.value(3).toInt());
+            this -> nb_detenus = (query.value(4).toInt());
+        }
+    }
+
+    return query.exec();
+}
+
+bool Cellule::recherche_nb_detenus(QString valeur)
+{
+    QSqlQuery query;
+
+    query.prepare("Select * from cellule where nb_detenus=:nb_detenus");
+    query.bindValue(":nb_detenus",valeur);
+    if (query.exec())
+    {
+        while (query.next()){
+
+            //            qDebug()<<"find";
+            this -> id_cellule = (query.value(0).toInt());
+            this -> type_cellule = (query.value(1).toString());
+            this -> nb_lits =(query.value(2).toInt());
+            this -> superficie_cellule = (query.value(3).toInt());
+            this -> nb_detenus = (query.value(4).toInt());
+        }
+    }
+    return query.exec();
+
 }
 

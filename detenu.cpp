@@ -1,4 +1,5 @@
 #include "detenu.h"
+#include "stats.h"
 #include <QSqlQuery>
 #include <QtDebug>
 #include <QObject>
@@ -52,7 +53,7 @@ void Detenu::setdossier_detenu(QString dossier_detenu){this->nom_detenu=dossier_
 
 
 
-bool Detenu::ajouter()
+bool Detenu::ajouter_detenu()
 {
     QSqlQuery query;
   QString id_detenu_string=QString::number(id_detenu);
@@ -74,32 +75,8 @@ bool Detenu::ajouter()
     return query.exec();
 
 }
-/*
-bool Detenu::modifier()
-{
-    QSqlQuery query;
-    QString id_detenu_string=QString::number(id_detenu);
-    QString taille_detenu_string=QString::number(taille_detenu);
-    QString poids_detenu_string=QString::number(poids_detenu);
-      query.prepare("UPDATE detenu SET id_detenu=:id_detenu, nom_detenu=:nom_detenu, prenom_detenu=:prenom_detenu,""date_naissance_detenu=:date_naissance_detenu,nationalite_detenu=:nationalite_detenu,"
-"sexe_detenu=:sexe_detenu, taille_detenu=:taille_detenu,poids_detenu=:poids_detenu,"
-"periode_detenu=:periode_detenu,dossier_detenu=:dossier_detenu"
-            "WHERE id_detenu=:id_detenu");
-      query.bindValue(":id_detenu",id_detenu);
-      query.bindValue(":nom_detenu",nom_detenu);
-      query.bindValue(":prenom_detenu",prenom_detenu);
-      query.bindValue(":date_naissance_detenu",date_naissance_detenu);
-      query.bindValue(":nationalite_detenu",nationalite_detenu);
-      query.bindValue(":sexe_detenu",sexe_detenu);
-      query.bindValue(":taille_detenu",taille_detenu);
-      query.bindValue(":poids_detenu",poids_detenu);
-      query.bindValue(":periode_detenu",periode_detenu);
-      query.bindValue(":dossier_detenu",dossier_detenu);
 
-
-      return query.exec();
-}*/
-bool Detenu::modifier(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu )
+bool Detenu::modifier_detenu(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu )
 {
     QSqlQuery query;
     QString id_detenu_string=QString::number(id_detenu);
@@ -120,7 +97,7 @@ bool Detenu::modifier(int id_detenu,QString nom_detenu,QString prenom_detenu,QSt
     query.bindValue(9, dossier_detenu);
     return query.exec();
 }
-bool Detenu::supprimer(int id_detenu)
+bool Detenu::supprimer_detenu(int id_detenu)
 {
     QSqlQuery query;
     query.prepare("Delete from Detenu where id_detenu= :id_detenu");
@@ -129,7 +106,7 @@ bool Detenu::supprimer(int id_detenu)
     return query.exec();
 }
 
-QSqlQueryModel* Detenu::afficher()
+QSqlQueryModel* Detenu::afficher_detenu()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
 

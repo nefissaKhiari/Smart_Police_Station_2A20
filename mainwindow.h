@@ -47,14 +47,14 @@ private slots:
 
     void on_pb_rechercher_cellule_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
    Detenu D;
   // QMediaPlayer * erreur = new QMediaPlayer ;
        Cellule tmpcellule;
-       /* QTimer *delay;
-       QTextToSpeech *speech;
-       QStringList allTextList;*/
+
 };
 
 #endif // MAINWINDOW_H
