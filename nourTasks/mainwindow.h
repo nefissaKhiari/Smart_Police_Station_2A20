@@ -6,6 +6,9 @@
 #include <QtCharts>
 #include <QChartView>
 #include<QPieSeries>
+#include<QPrinter>
+#include<QPrintDialog>
+
 
 //test git
 namespace Ui {
@@ -42,6 +45,12 @@ private slots:
     void on_pushButton_rechercher_clicked();
 
     void on_pushButton_pdf_clicked();
+
+    void on_actionprint_triggered();
+
+    void on_actionGenerate_pdf_triggered();
+
+    void on_actionQuit_triggered();
 
 private:
     Ui::MainWindow *ui;

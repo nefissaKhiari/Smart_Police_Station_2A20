@@ -248,3 +248,90 @@ void MainWindow::on_pushButton_pdf_clicked()
                                              painter.end();
                                         }
 }
+
+void MainWindow::on_actionprint_triggered()
+{
+   QPrinter printer;
+   QPrintDialog dialog(&printer,this);
+   dialog.setWindowTitle("Print Document");
+   if (ui->tab_equipement->SelectRows)
+
+
+    dialog.addEnabledOption(QAbstractPrintDialog::PrintSelection);
+   if (dialog.exec()!=QDialog::Accepted)
+    {
+        return;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void MainWindow::on_actionGenerate_pdf_triggered()
+{
+    //QDateTime datecreation = date.currentDateTime();
+                         //QString afficheDC = "Date de Creation PDF : " + datecreation.toString() ;
+                                QPdfWriter pdf("C:/Users/zraib/OneDrive/Bureau/nourPDF/Pdf.pdf");
+                                QPainter painter(&pdf);
+                               int i = 4000;
+                                    painter.setPen(Qt::red);
+                                    painter.setFont(QFont("Arial Black", 30));
+                                    painter.drawText(1500,1200,"Tableau des equipements");
+                                    painter.setPen(Qt::black);
+                                    painter.setFont(QFont("Arial", 50));
+                                   // painter.drawText(1100,2000,afficheDC);
+                                   //painter.drawRect(100,100,100,100);
+                                      painter.drawRect(200,100,7700,2100);
+                                    //painter.drawPixmap(QRect(7600,70,2000,2600),QPixmap("C:/Users/RH/Desktop/projecpp/image/logopdf.png"));
+                                    painter.drawRect(0,3000,9600,500);
+                                    painter.setFont(QFont("Arial", 9));
+                                    painter.drawText(250,3300,"Id");
+                                    painter.drawText(1000,3300,"Nom equipement");
+                                    painter.drawText(2400,3300,"Type equipement");
+                                    painter.drawText(3800,3300,"Quantité equipement ");
+
+                                    painter.drawText(5500,3300,"Etat equipement");
+                                    painter.drawText(7000,3300,"Date de fabrication");
+
+
+                                    QSqlQuery query;
+
+                                    query.prepare("select * from equipement");
+                                    query.exec();
+                                    while (query.next())
+                                    {
+                                        painter.drawText(250,i,query.value(0).toString());
+                                        painter.drawText(1000,i,query.value(1).toString());
+                                        painter.drawText(2400,i,query.value(2).toString());
+                                        painter.drawText(3800,i,query.value(3).toString());
+                                        painter.drawText(5500,i,query.value(4).toString());
+                                        painter.drawText(7000,i,query.value(5).toString());
+
+                                      i = i + 500;
+                                    }
+                                    int reponse = QMessageBox::question(this, "Génerer PDF", "<PDF Enregistré>...Vous Voulez Affichez Le PDF ?", QMessageBox::Yes |  QMessageBox::No);
+                                        if (reponse == QMessageBox::Yes)
+                                        {
+                                            QDesktopServices::openUrl(QUrl::fromLocalFile("C:/Users/zraib/OneDrive/Bureau/nourPDF/Pdf.pdf"));
+                                        }
+                                        if (reponse == QMessageBox::No)
+                                        {
+                                             painter.end();
+                                        }
+}
+
+void MainWindow::on_actionQuit_triggered()
+{
+    QApplication::quit();
+}
