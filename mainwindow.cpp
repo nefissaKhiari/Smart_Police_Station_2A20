@@ -24,6 +24,34 @@ MainWindow::MainWindow(QWidget *parent) :
    ui->le_id->setValidator( new QIntValidator(0, 999, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
 
+   QPieSeries *series = new QPieSeries();
+
+         QSqlQuery query;
+           int count=0 ;
+           QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
+           while(requete.next())
+           {
+                   count++ ;
+           }
+
+           QSqlQuery query1;
+             int count1=0 ;
+             QSqlQuery requete1("select * from detenu where sexe_detenu='homme'") ;
+             while(requete1.next())
+             {
+                     count1++ ;
+             }
+
+
+       series->append("femme",count);
+       series->append("homme",count1);
+
+       QChart * chart =new QChart();
+       chart-> addSeries(series);
+       chart->setTitle("Statistiques des équipements");
+
+       QChartView *chartview= new QChartView (chart);
+       chartview->setParent(ui->frame_charts);
 }
 
 
