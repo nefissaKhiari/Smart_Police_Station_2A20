@@ -6,6 +6,7 @@
 
 QT       += core gui sql printsupport
 QT       += core gui network charts
+QT       += core gui charts
 #QT       += pdf
 #QT += gui
 QT       += printsupport multimedia texttospeech
