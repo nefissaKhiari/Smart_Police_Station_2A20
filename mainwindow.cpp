@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
        QChart * chart =new QChart();
        chart-> addSeries(series);
-       chart->setTitle("Statistiques des équipements");
+       chart->setTitle("Statistiques des Detenus par Sexe ");
 
        QChartView *chartview= new QChartView (chart);
        chartview->setParent(ui->frame_charts);
@@ -157,7 +157,7 @@ void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
 }
 }
 
-void MainWindow::on_pb_ajouter_2_clicked()
+void MainWindow::on_pb_ajouter_cellule_clicked()
 {
     int id_cellule=ui->le_id_2->text().toInt();
     QString type_cellule=ui->le_type_cellule->text();
@@ -165,12 +165,12 @@ void MainWindow::on_pb_ajouter_2_clicked()
     int superficie_cellule=ui->la_superficie->text().toInt();
     int nb_detenus=ui->le_nb_detenus->text().toInt();
    Cellule C(id_cellule, type_cellule, nb_lits, superficie_cellule ,  nb_detenus );
-    bool test=C.ajouter2();
+    bool test=C.ajouter_cellule();
     QMessageBox msgBox;
 
     if(test)
        { msgBox.setText("Ajout avec succés");
-        ui->tab_cellule->setModel(C.afficher2());
+        ui->tab_cellule->setModel(C.afficher_cellule());
     }
     else
         msgBox.setText("Echec d'ajout");
@@ -180,15 +180,15 @@ void MainWindow::on_pb_ajouter_2_clicked()
 
 
 
-void MainWindow::on_pb_supprimer_2_clicked()
+void MainWindow::on_pb_supprimer_cellule_clicked()
 {
     Cellule C1; C1.setid_cellule(ui->le_id_2->text().toInt());
-    bool test=C1.supprimer2(C1.getid_cellule());
+    bool test=C1.supprimer_cellule(C1.getid_cellule());
     QMessageBox msgBox;
 
     if(test)
        { msgBox.setText("Supprimer avec succés");
-     ui->tab_cellule->setModel(C1.afficher2());
+     ui->tab_cellule->setModel(C1.afficher_cellule());
     }
     else
         msgBox.setText("Echec de suppression");
@@ -222,7 +222,7 @@ void MainWindow::on_tab_cellule_activated(const QModelIndex &index)
 void MainWindow::on_modifier_cellule_clicked()
 {
     int id_cellule=ui->le_id_2->text().toInt();
-    QString type_cellule=ui->le_nom->text();
+    QString type_cellule=ui->le_type_cellule->text();
     int nb_lits=ui->le_nb_lits->text().toInt();
     int superficie_cellule=ui->la_superficie->text().toInt();
     int nb_detenus=ui->le_nb_detenus->text().toInt();
@@ -233,7 +233,7 @@ void MainWindow::on_modifier_cellule_clicked()
 
      if(test)
         { msgBox.setText("Modification avec succés");
-         ui->tab_cellule->setModel(C.afficher2());
+         ui->tab_cellule->setModel(C.afficher_cellule());
      }
      else
          msgBox.setText("Echec de modification");
@@ -363,3 +363,11 @@ void MainWindow::on_pushButton_clicked()
     stat.setModal(true);
     stat.exec();
 }
+void MainWindow::on_pb_rechercher_cellule_clicked()
+{
+    QString res=ui->recher_cellule->text();
+
+        ui->tab_cellule->setModel(tmpcellule.rechercher_cellule(res));
+}
+
+

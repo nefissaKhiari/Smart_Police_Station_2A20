@@ -27,7 +27,7 @@ void Cellule::setnb_lits(int nb_lits){this->nb_lits=nb_lits;}
 void Cellule::setnb_detenus(int nb_detenus){this->nb_detenus=nb_detenus;}
 
 
-bool Cellule::ajouter2()
+bool Cellule::ajouter_cellule()
 {
     QSqlQuery query;
   QString id_cellule_string=QString::number(id_cellule);
@@ -47,14 +47,14 @@ bool Cellule::ajouter2()
 
 }
 
-bool Cellule::supprimer2(int id_cellule)
+bool Cellule::supprimer_cellule(int id_cellule)
 {
     QSqlQuery query;
     query.prepare("Delete from Cellule where id_cellule= :id_cellule");
     query.bindValue(id_cellule, id_cellule);
     return query.exec();
 }
-QSqlQueryModel* Cellule::afficher2()
+QSqlQueryModel* Cellule::afficher_cellule()
 {
     QSqlQueryModel* model=new QSqlQueryModel();
 
@@ -137,7 +137,7 @@ QSqlQueryModel * Cellule::tri_cellule()
         return model;
 }*/
 
-/*QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
+QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
     model->setQuery("select * from cellule where id_cellule='"+rech+"' ");
@@ -147,9 +147,9 @@ QSqlQueryModel * Cellule::tri_cellule()
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Superficie cellule"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
         return model;
-}*/
+}
 
-bool Cellule::recherche_id_cellule(QString valeur)
+/*bool Cellule::recherche_id_cellule(QString valeur)
 {
     QSqlQuery query;
 
@@ -214,5 +214,5 @@ bool Cellule::recherche_nb_detenus(QString valeur)
     }
     return query.exec();
 
-}
+}*/
 

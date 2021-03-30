@@ -32,9 +32,9 @@ private slots:
 
     void on_pb_modifier_clicked();
 
-    void on_pb_ajouter_2_clicked();
+    void on_pb_ajouter_cellule_clicked();
 
-    void on_pb_supprimer_2_clicked();
+    void on_pb_supprimer_cellule_clicked();
 
     void on_tab_detenu_activated(const QModelIndex &index);
 
@@ -42,7 +42,7 @@ private slots:
 
     void on_modifier_cellule_clicked();
 
-    void on_pushButton_6_clicked();
+   // void on_pushButton_6_clicked();
 
     void on_pdf_detenu_clicked();
 
@@ -51,6 +51,8 @@ private slots:
     void on_pb_rechercher_cellule_clicked();
 
     void on_pushButton_clicked();
+
+
 
 private:
     Ui::MainWindow *ui;

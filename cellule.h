@@ -23,16 +23,14 @@ public:
     void setsuperficie_cellule(int);
     void setnb_detenus(int);
 
-    bool ajouter2();
-    QSqlQueryModel* afficher2();
-    bool supprimer2(int);
+    bool ajouter_cellule();
+    QSqlQueryModel* afficher_cellule();
+    bool supprimer_cellule(int);
     bool modifier_cellule(int,QString,int,int,int);
     QSqlQueryModel * tri_nb_detenus() ;
     QSqlQueryModel * tri_id_cellule() ;
     QSqlQueryModel * tri_nb_lits() ;
-    bool  recherche_id_cellule(QString);
-    bool  recherche_type_cellule(QString);
-    bool  recherche_nb_detenus(QString);
+   QSqlQueryModel * rechercher_cellule(QString);
 private:
         int id_cellule,nb_lits,superficie_cellule,nb_detenus;
         QString type_cellule;
