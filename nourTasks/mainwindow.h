@@ -3,6 +3,10 @@
 #include "equipement.h"
 #include "maintenance.h"
 #include <QMainWindow>
+#include <QtCharts>
+#include <QChartView>
+#include<QPieSeries>
+
 //test git
 namespace Ui {
 class MainWindow;

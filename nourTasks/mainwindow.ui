@@ -17,14 +17,14 @@
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>20</y>
+      <x>0</x>
+      <y>0</y>
       <width>761</width>
       <height>481</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -198,7 +198,7 @@
         <rect>
          <x>10</x>
          <y>260</y>
-         <width>691</width>
+         <width>391</width>
          <height>151</height>
         </rect>
        </property>
@@ -321,6 +321,22 @@
         <string>Generate_pdf</string>
        </property>
       </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QFrame" name="frame_charts">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>741</width>
+        <height>441</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout"/>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">

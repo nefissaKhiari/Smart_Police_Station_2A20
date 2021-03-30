@@ -4,7 +4,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include <QIntValidator>
- #include <QPrinter>
+#include <QPrinter>
 #include<QPrintDialog>
 #include<QPdfWriter>
 #include<QPainter>
@@ -19,6 +19,36 @@
     ui->setupUi(this);
     ui->tab_equipement->setModel(E.afficher());
    // ui->tab_equipement->setModel(E.afficher());
+    QPieSeries *series = new QPieSeries();
+
+      QSqlQuery query;
+        int count=0 ;
+        QSqlQuery requete("select * from equipement where etatequipement=0") ;
+        while(requete.next())
+        {
+                count++ ;
+        }
+
+        QSqlQuery query1;
+          int count1=0 ;
+          QSqlQuery requete1("select * from equipement where etatequipement=1") ;
+          while(requete1.next())
+          {
+                  count1++ ;
+          }
+
+
+    series->append("endommage",count);
+    series->append("bien",count1);
+
+    QChart * chart =new QChart();
+    chart-> addSeries(series);
+    chart->setTitle("Statistiques des équipements");
+
+    QChartView *chartview= new QChartView (chart);
+    chartview->setParent(ui->frame_charts);
+
+
 }
 
 MainWindow::~MainWindow()

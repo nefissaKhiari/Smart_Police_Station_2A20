@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui sql printsupport
+QT       += core gui charts
 CONFIG+=console
 #QT       += pdf
 #QT += gui
