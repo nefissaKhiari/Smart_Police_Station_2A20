@@ -79,7 +79,7 @@ QSqlQueryModel* Maintenance::afficherMaintenance()
 
   return model;
 
-}
+ }
 
 bool Maintenance::supprimerMaintenance(int idMaintenance)
 {

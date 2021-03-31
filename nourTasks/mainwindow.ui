@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -353,17 +353,6 @@
      <attribute name="title">
       <string>Statistiques</string>
      </attribute>
-     <widget class="QFrame" name="frame_charts">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>0</y>
-        <width>741</width>
-        <height>441</height>
-       </rect>
-      </property>
-      <layout class="QHBoxLayout" name="horizontalLayout"/>
-     </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
      <attribute name="title">

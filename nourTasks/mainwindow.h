@@ -39,7 +39,7 @@ private slots:
 
     void on_tab_equipement_activated(const QModelIndex &index);
 
-    void on_pushButton_3_clicked();
+
 
     void on_trier_clicked();
 

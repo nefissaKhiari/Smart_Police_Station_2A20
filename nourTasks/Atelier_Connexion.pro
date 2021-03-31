@@ -34,16 +34,19 @@ SOURCES += \
         main.cpp \
     maintenance.cpp \
         mainwindow.cpp \
-    connection.cpp
+    connection.cpp \
+    stats.cpp
 
 HEADERS += \
     equipement.h \
     maintenance.h \
         mainwindow.h \
-    connection.h
+    connection.h \
+    stats.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        stats.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

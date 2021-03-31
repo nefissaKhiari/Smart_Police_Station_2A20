@@ -1,6 +1,6 @@
  #include "mainwindow.h"
 #include "equipement.h"
-#include "dialog.h"
+#include "stats.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QMessageBox>
@@ -20,7 +20,7 @@
     ui->setupUi(this);
     ui->tab_equipement->setModel(E.afficher());
     ui->tab_maintenance->setModel(M.afficherMaintenance());
-    QPieSeries *series = new QPieSeries();
+   /* QPieSeries *series = new QPieSeries();
 
       QSqlQuery query;
         int count=0 ;
@@ -47,7 +47,7 @@
     chart->setTitle("Statistiques des équipements");
 
     QChartView *chartview= new QChartView (chart);
-    chartview->setParent(ui->frame_charts);
+    chartview->setParent(ui->frame_charts);*/
 
 
 }
@@ -401,4 +401,12 @@ void MainWindow::on_pushButton_modifier_maintenance_clicked()
              msgBox.setText("Echec de modification");
          msgBox.exec();
 
+}
+
+void MainWindow::on_pushButton_statistique_clicked()
+{
+    stats stat;
+        stat.Statistique();
+        stat.setModal(true);
+        stat.exec();
 }
