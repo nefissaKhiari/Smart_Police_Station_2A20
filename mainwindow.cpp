@@ -24,7 +24,7 @@ MainWindow::MainWindow(QWidget *parent) :
    ui->le_id->setValidator( new QIntValidator(0, 999, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
 
-   QPieSeries *series = new QPieSeries();
+   /*QPieSeries *series = new QPieSeries();
 
          QSqlQuery query;
            int count=0 ;
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
        chart->setTitle("Statistiques des Detenus par Sexe ");
 
        QChartView *chartview= new QChartView (chart);
-       chartview->setParent(ui->frame_charts);
+       chartview->setParent(ui->frame_charts);*/
 }
 
 
@@ -360,6 +360,7 @@ void MainWindow::on_pb_trier_cellule_clicked()
 void MainWindow::on_pushButton_clicked()
 {
     stats stat;
+    stat.Statistique();
     stat.setModal(true);
     stat.exec();
 }

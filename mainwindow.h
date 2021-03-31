@@ -5,9 +5,9 @@
 #include <QTimer>
 //#include <QtTextToSpeech/QTextToSpeech>
 //#include <QMediaPlayer>
-#include <QtCharts>
+/*#include <QtCharts>
 #include <QChartView>
-#include<QPieSeries>
+#include<QPieSeries>*/
 #include "detenu.h"
 #include "cellule.h"
 

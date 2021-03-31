@@ -1,4 +1,5 @@
 #include "stats.h"
+
 #include "ui_stats.h"
 
 stats::stats(QWidget *parent) :
@@ -13,7 +14,40 @@ stats::~stats()
     delete ui;
 }
 
-int stats::Statistique_partie2()
+
+        void stats::Statistique()
+      { QPieSeries *series = new QPieSeries();
+            QSqlQuery query;
+        int count=0 ;
+        QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
+        while(requete.next())
+        {
+                count++ ;
+        }
+
+
+        QSqlQuery query1;
+          int count1=0 ;
+          QSqlQuery requete1("select * from detenu where sexe_detenu='homme'") ;
+          while(requete1.next())
+          {
+                  count1++ ;
+          }
+          series->append("femme",count);
+          series->append("homme",count1);
+
+          QChart * chart =new QChart();
+          chart-> addSeries(series);
+          chart->setTitle("Statistiques des Detenus par Sexe ");
+
+          QChartView *chartview= new QChartView (chart);
+          chartview->setParent(ui->frame_charts);
+        }
+
+
+
+
+/*int stats::Statistique_partie2()
 {
     QSqlQuery query;
     int count=0 ;
@@ -96,7 +130,7 @@ void stats::paintEvent(QPaintEvent *)
     ui->label_4->setText("femme") ;
 
 }
-/*int stats::Statistique_partie2()
+int stats::Statistique_partie2()
 {
     QSqlQuery query;
     int count=0 ;
@@ -179,7 +213,9 @@ void stats::paintEvent(QPaintEvent *)
 }
 
 */
-void stats::on_pushButton_clicked()
+void stats::on_hide_clicked()
 {
     hide();
 }
+
+
