@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
    ui->le_id->setValidator( new QIntValidator(0, 999, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
+   ui->tab_cellule->setModel(C.afficher_cellule());
 
    /*QPieSeries *series = new QPieSeries();
 

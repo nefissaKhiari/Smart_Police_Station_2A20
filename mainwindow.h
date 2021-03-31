@@ -58,7 +58,7 @@ private:
     Ui::MainWindow *ui;
    Detenu D;
   // QMediaPlayer * erreur = new QMediaPlayer ;
-       Cellule tmpcellule;
+       Cellule tmpcellule , C;
 
 };
 
