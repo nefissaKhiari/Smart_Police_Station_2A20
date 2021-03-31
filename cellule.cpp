@@ -51,7 +51,7 @@ bool Cellule::supprimer_cellule(int id_cellule)
 {
     QSqlQuery query;
     query.prepare("Delete from Cellule where id_cellule= :id_cellule");
-    query.bindValue(id_cellule, id_cellule);
+    query.bindValue(":id_cellule", id_cellule);
     return query.exec();
 }
 QSqlQueryModel* Cellule::afficher_cellule()
