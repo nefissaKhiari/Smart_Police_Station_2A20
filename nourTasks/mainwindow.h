@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 #include "equipement.h"
 #include "maintenance.h"
+
 #include <QMainWindow>
 #include <QtCharts>
 #include <QChartView>
@@ -52,10 +53,17 @@ private slots:
 
     void on_actionQuit_triggered();
 
+    void on_pushButton_statistique_clicked();
+
+    void on_pushButton_supprimer_maintenance_clicked();
+
+    void on_pushButton_modifier_maintenance_clicked();
+
 private:
     Ui::MainWindow *ui;
     Equipement E,E1;
     Maintenance M;
+
 };
 
 #endif // MAINWINDOW_H

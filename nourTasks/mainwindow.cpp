@@ -1,5 +1,6 @@
  #include "mainwindow.h"
 #include "equipement.h"
+#include "dialog.h"
 #include "ui_mainwindow.h"
 #include <QDebug>
 #include <QMessageBox>
@@ -18,7 +19,7 @@
 {
     ui->setupUi(this);
     ui->tab_equipement->setModel(E.afficher());
-   // ui->tab_equipement->setModel(E.afficher());
+    ui->tab_maintenance->setModel(M.afficherMaintenance());
     QPieSeries *series = new QPieSeries();
 
       QSqlQuery query;
@@ -334,4 +335,70 @@ void MainWindow::on_actionGenerate_pdf_triggered()
 void MainWindow::on_actionQuit_triggered()
 {
     QApplication::quit();
+}
+
+
+
+void MainWindow::on_tab_maintenance_activated(const QModelIndex &index)
+{
+    QString val=ui->tab_maintenance->model()->data(index).toString();
+    QSqlQuery query;
+    query.prepare("select* from maintenance where idMaintenance='"+val+"' ");
+    if (query.exec())
+    { while(query.next())
+        {
+            ui->id_maintenance->setText(query.value(0).toString());
+            ui->id_sup->setText(query.value(0).toString());
+            ui->duree_maintenance->setText(query.value(1).toString());
+            ui->date_entree_maintenance->setText(query.value(2).toString());
+            ui->date_sortie_maintenance->setText(query.value(3).toString());
+            ui->frais_maintenance->setText(query.value(4).toString());
+
+          }
+
+     }
+}
+
+void MainWindow::on_pushButton_supprimer_maintenance_clicked()
+{
+    Maintenance M;
+       M.setIdMaintenance(ui->id_sup->text().toInt());
+        bool test=M.supprimerMaintenance(M.getIdMaintenance());
+        QMessageBox msgBox;
+
+        if(test)
+           { msgBox.setText("Supprimer avec succés");
+        ui->tab_maintenance->setModel(M.afficherMaintenance());
+        }
+        else
+            msgBox.setText("Echec de suppression");
+        msgBox.exec();
+
+}
+
+void MainWindow::on_pushButton_modifier_maintenance_clicked()
+{
+    int idMaintenance=ui->id_maintenance->text().toInt();
+    int frais=ui->frais_maintenance->text().toInt();
+
+    QString dureeMaintenance=ui->duree_maintenance->text();
+    QString dateEntreeM=ui->date_entree_maintenance->text();
+    QString dateSortieM=ui->date_sortie_maintenance->text();
+
+
+  Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+
+
+
+      bool test=M.modifierMaintenance(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+         QMessageBox msgBox;
+
+         if(test)
+            { msgBox.setText("Modification avec succés");
+             ui->tab_maintenance->setModel(M.afficherMaintenance());
+         }
+         else
+             msgBox.setText("Echec de modification");
+         msgBox.exec();
+
 }

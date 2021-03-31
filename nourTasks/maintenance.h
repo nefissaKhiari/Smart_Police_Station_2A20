@@ -26,6 +26,7 @@ public:
      bool ajouterMaintenance();
      QSqlQueryModel* afficherMaintenance();
      bool supprimerMaintenance(int);
+     bool modifierMaintenance(int,QString,QString,QString,int);
 
 private:
      int idMaintenance,frais;

@@ -84,7 +84,7 @@ QSqlQueryModel* Maintenance::afficherMaintenance()
 bool Maintenance::supprimerMaintenance(int idMaintenance)
 {
     QSqlQuery query;
-    query.prepare("Delete from maintenance where idMaintenance= :idMaintenance");//preparer la req
+    query.prepare("Delete from maintenance where idMaintenance= :idMaintenance");
     query.bindValue(0, idMaintenance);
 
     return ((query.exec()));
@@ -92,24 +92,24 @@ bool Maintenance::supprimerMaintenance(int idMaintenance)
 
 
 
-/*bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais )
+bool Maintenance::modifierMaintenance(int idMaintenance,QString dureeMaintenance ,QString dateEntreeM,QString dateSortieM,int frais)
 {
     QSqlQuery query;
-    QString idEq=QString::number(idMaintenance) ;
-    QString qEq=QString::number(frais);
+    QString idM=QString::number(idMaintenance);
+    QString qM=QString::number(frais);
 
 
 
-    query.prepare("update maintenance set idEquipement='"+idEq+"', nomEquipement='"+nomEquipement+"',typeEquipement='"+typeEquipement+"',quantiteEquipement='"+qEq+"',etatEquipement='"+eEq+"',dateFabrication='"+dateFabrication+"' where idEquipement=:idEquipement");
-    query.bindValue(0, idEq);
-    query.bindValue(1, nomEquipement);
-    query.bindValue(2, typeEquipement);
-    query.bindValue(3,qEq );
-    query.bindValue(4, eEq);
-    query.bindValue(5, dateFabrication);
+    query.prepare("update maintenance set idMaintenance='"+idM+"', dureeMaintenance='"+dureeMaintenance+"',dateEntreeM='"+dateEntreeM+"',dateSortieM='"+dateSortieM+"',frais='"+qM+"' where idMaintenance=:idMaintenance");
+    query.bindValue(0, idM);
+    query.bindValue(1, dureeMaintenance);
+    query.bindValue(2, dateEntreeM);
+    query.bindValue(3,dateSortieM );
+    query.bindValue(4, qM);
+
 
     return query.exec();
 }
-*/
+
 
 
