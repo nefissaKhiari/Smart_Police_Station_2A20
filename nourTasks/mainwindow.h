@@ -59,6 +59,8 @@ private slots:
 
     void on_pushButton_modifier_maintenance_clicked();
 
+    void on_imprimer_clicked();
+
 private:
     Ui::MainWindow *ui;
     Equipement E,E1;
