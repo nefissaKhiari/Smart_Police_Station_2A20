@@ -1,15 +1,18 @@
  #include "equipement.h"
+ #include "maintenance.h"
 #include<QSqlQuery>
 #include<QtDebug>
 #include <QString>
+#include <QDate>
 #include <QObject>
+ #include <QElapsedTimer>
 Equipement::Equipement()
 {
  idEquipement=0;quantiteEquipement=0;etatEquipement=0;
- nomEquipement="";typeEquipement="";dateFabrication="";
+ nomEquipement="";typeEquipement="";
 
 } //le role de ce constructeur est d'affecter les nouvelles valeurs inserer par l'utilisateur
- Equipement::Equipement(int idEquipement,int quantiteEquipement, int etatEquipement,QString nomEquipement,QString typeEquipement,QString dateFabrication)
+ Equipement::Equipement(int idEquipement,int quantiteEquipement, int etatEquipement,QString nomEquipement,QString typeEquipement,QDate dateFabrication)
  { this->idEquipement=idEquipement;
    this->quantiteEquipement=quantiteEquipement;
    this->etatEquipement=etatEquipement;
@@ -27,7 +30,7 @@ QString Equipement:: getNomEquipement()
 {return nomEquipement ;}
 QString Equipement:: getTypeEquipement()
 {return  typeEquipement;}
-QString Equipement:: getDateFabrication()
+QDate Equipement:: getDateFabrication()
 { return  dateFabrication;}
 
 void Equipement::setIdEquipement(int idEquipement)
@@ -40,7 +43,7 @@ void Equipement::setNomEquipement(QString nomEquipement)
 { this->nomEquipement=nomEquipement;}
 void Equipement::setTypeEquipement(QString typeEquipement)
 { this->typeEquipement=typeEquipement;}
-void Equipement::setDateFabrication(QString dateFabrication)
+void Equipement::setDateFabrication(QDate dateFabrication)
 { this->dateFabrication=dateFabrication;}
 
 bool Equipement::ajouterEquipement()
@@ -85,30 +88,33 @@ bool Equipement::supprimer(int idEquipement)
 {
     QSqlQuery query;
     query.prepare("Delete from equipement where idEquipement= :idEquipement");//preparer la req
+
     query.bindValue(0, idEquipement);
+
 
     return ((query.exec()));
 }
 
-bool Equipement::modifier(int idEquipement,QString nomEquipement,QString typeEquipement,int quantiteEquipement,int etatEquipement,QString dateFabrication )
+bool Equipement::modifier(int idEquipement,QString nomEquipement,QString typeEquipement,int quantiteEquipement,int etatEquipement,QDate dateFabrication )
 {
     QSqlQuery query;
     QString idEq=QString::number(idEquipement) ;
     QString qEq=QString::number(quantiteEquipement);
     QString eEq=QString::number(etatEquipement);
+    //QString dateFab=dateFabrication.toString("MM/dd/yyyy");
 
 
-    query.prepare("update equipement set idEquipement='"+idEq+"', nomEquipement='"+nomEquipement+"',typeEquipement='"+typeEquipement+"',quantiteEquipement='"+qEq+"',etatEquipement='"+eEq+"',dateFabrication='"+dateFabrication+"' where idEquipement=:idEquipement");
+    query.prepare("update equipement set idEquipement='"+idEq+"', nomEquipement='"+nomEquipement+"',typeEquipement='"+typeEquipement+"',quantiteEquipement='"+qEq+"',etatEquipement='"+eEq+"',dateFabrication='"+dateFabrication.toString("MM/dd/yyyy")+"' where idEquipement=:idEquipement");
     query.bindValue(0, idEq);
     query.bindValue(1, nomEquipement);
     query.bindValue(2, typeEquipement);
     query.bindValue(3,qEq );
     query.bindValue(4, eEq);
-    query.bindValue(5, dateFabrication);
+    query.bindValue(5,dateFabrication.toString("MM/dd/yyyy"));
 
     return query.exec();
 }
-QSqlQueryModel* Equipement::tri_quantite()// triii
+QSqlQueryModel* Equipement::tri_quantite()
 {
     QSqlQueryModel* model=new QSqlQueryModel() ;
     QSqlQuery *query=new QSqlQuery;
@@ -137,13 +143,20 @@ QSqlQueryModel* Equipement::tri_etat()// tri
 QSqlQueryModel * Equipement::rechercherEquipement(QString rech)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
-    model->setQuery("select * from equipement where idEquipement='"+rech+"' ");
+    /* QElapsedTimer t;
+    t.start();
+    while(t.elapsed()>2000)
+   {*/
+
+    model->setQuery("select * from equipement where idEquipement like '%"+rech+"%' ");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("identifiant"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Nom"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Type"));
     model->setHeaderData(3, Qt::Horizontal, QObject::tr("Quantité"));
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Etat"));
     model->setHeaderData(5, Qt::Horizontal, QObject::tr("DateFabrication"));
+
+  //model->setQuery("select * from equipement ");
         return model;
 }
 

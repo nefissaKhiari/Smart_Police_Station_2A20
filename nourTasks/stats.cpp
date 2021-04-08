@@ -1,6 +1,11 @@
 #include "stats.h"
 
 #include "ui_stats.h"
+#include <QtCharts>
+#include <QChartView>
+
+#include<QBarSet>
+#include<QBarSeries>
 
 stats::stats(QWidget *parent) :
     QDialog(parent),
@@ -16,33 +21,8 @@ stats::~stats()
 
 
         void stats::Statistique()
-      { QPieSeries *series = new QPieSeries();
+      {
 
-        QSqlQuery query;
-          int count=0 ;
-          QSqlQuery requete("select * from equipement where etatequipement=0") ;
-          while(requete.next())
-          {
-                  count++ ;
-          }
-
-
-          QSqlQuery query1;
-            int count1=0 ;
-            QSqlQuery requete1("select * from equipement where etatequipement=1") ;
-            while(requete1.next())
-            {
-                    count1++ ;
-            }
-          series->append("endommage",count);
-          series->append("bien",count1);
-
-          QChart * chart =new QChart();
-          chart-> addSeries(series);
-          chart->setTitle("Statistiques des Equipement Etat ");
-
-          QChartView *chartview= new QChartView (chart);
-          chartview->setParent(ui->frame_charts);
         }
 
 

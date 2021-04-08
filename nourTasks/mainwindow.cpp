@@ -12,42 +12,82 @@
 #include<QDesktopServices>
 #include<QUrl>
 #include <QtWidgets>
+#include<QDate>
 
  MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->le_id->setValidator( new QIntValidator(0,999,this));
+
+       /*QString etatEquipement= ui->le_etat->text();
+       if ( etatEquipement == "0" || etatEquipement =="1" )
+        {
+
+        }*/
     ui->tab_equipement->setModel(E.afficher());
     ui->tab_maintenance->setModel(M.afficherMaintenance());
-   /* QPieSeries *series = new QPieSeries();
+    QSqlQuery query;
+      int count=0 ;
+      QSqlQuery requete("select * from equipement where etatequipement=0") ;
+      while(requete.next())
+      {
+              count++ ;
+      }
 
-      QSqlQuery query;
-        int count=0 ;
-        QSqlQuery requete("select * from equipement where etatequipement=0") ;
-        while(requete.next())
+
+      QSqlQuery query1;
+        int count1=0 ;
+        QSqlQuery requete1("select * from equipement where etatequipement=1") ;
+        while(requete1.next())
         {
-                count++ ;
+                count1++ ;
         }
+     /* series->append("endommage",count);
+      series->append("bien",count1);
 
-        QSqlQuery query1;
-          int count1=0 ;
-          QSqlQuery requete1("select * from equipement where etatequipement=1") ;
-          while(requete1.next())
-          {
-                  count1++ ;
-          }
+      QChart * chart =new QChart();
+      chart-> addSeries(series);
+      chart->setTitle("STATISTIQUES DES EQUIPEMENTS PAR ETAT ");
+
+      QChartView *chartview= new QChartView (chart);
+      chartview->setParent(ui->frame_charts);*/
+        QBarSet *set0= new QBarSet(" Nombre des équipements endommagés");
+        QBarSet *set1= new QBarSet("Nombre des équipements en bon etat");
+       /* QBarSet *set2= new QBarSet("John");
+        QBarSet *set3= new QBarSet("Nour");
+        QBarSet *set4= new QBarSet("Ahmed");*/
+
+        *set0 <<count ;
+         *set1<<count1;
+       /* *set2<<80<<100<<70<<13<<60<<20;
+        *set3<<30<<10<<80<<70<<60<<45;
+        *set4<<100<<40<<70<<30<<16<<42;*/
+        QBarSeries *series= new QBarSeries();
+          series->append(set0);
+            series->append(set1);
+             /* series->append(set2);
+                series->append(set3);
+                  series->append(set4);*/
+       QChart * chart =new QChart();
+          chart-> addSeries(series);
+          chart->setTitle("Statistiques des Equipement Etat ");
+          chart->setAnimationOptions(QChart::SeriesAnimations);
+        QStringList categories;
+        categories <<"Jan"<<"Feb"<<"Mar"<<"Apr"<<"May"<<"Jul";
+        QBarCategoryAxis *axis= new QBarCategoryAxis();
+        axis->append(categories);
+        chart->createDefaultAxes();
+        chart->setAxisX(axis,series);
 
 
-    series->append("endommage",count);
-    series->append("bien",count1);
 
-    QChart * chart =new QChart();
-    chart-> addSeries(series);
-    chart->setTitle("Statistiques des équipements");
 
-    QChartView *chartview= new QChartView (chart);
-    chartview->setParent(ui->frame_charts);*/
+        QChartView *chartview= new QChartView (chart);
+        chartview->setParent(ui->frame_charts);
+
+
 
 
 }
@@ -64,10 +104,11 @@ void MainWindow::on_pb_ajouter_clicked()
 {
     int idEquipement=ui->le_id->text().toInt();
     int quantiteEquipement=ui->la_quantite->text().toInt();
-    int etatEquipement=ui->le_etat->text().toInt();
+     int etatEquipement = ui->le_etat->text().toInt();
+
     QString nomEquipement=ui->le_nom->text();
     QString typeEquipement=ui->le_type->text();
-    QString dateFabrication=ui->la_date->text();
+    QDate dateFabrication=ui->la_date->date();
 
     Equipement E(idEquipement,quantiteEquipement,etatEquipement,nomEquipement,typeEquipement,dateFabrication);
     bool test=E.ajouterEquipement();
@@ -85,7 +126,7 @@ void MainWindow::on_pb_ajouter_clicked()
 void MainWindow::on_pb_supprimer_clicked()
 {
     Equipement E1;
-       E1.setIdEquipement(ui->le_id_supp->text().toInt());
+       E1.setIdEquipement(ui->le_id->text().toInt());
         bool test=E1.supprimer(E1.getIdEquipement());
         QMessageBox msgBox;
 
@@ -103,10 +144,10 @@ void MainWindow::on_pb_modifier_clicked()
 
     int idEquipement=ui->le_id->text().toInt();
     int quantiteEquipement=ui->la_quantite->text().toInt();
-    int etatEquipement=ui->le_etat->text().toInt();
+    int etatEquipement = ui->le_etat->text().toInt();
     QString nomEquipement=ui->le_nom->text();
     QString typeEquipement=ui->le_type->text();
-    QString dateFabrication=ui->la_date->text();
+  QDate dateFabrication=ui->la_date->date();
 
 
   Equipement E(idEquipement,quantiteEquipement,etatEquipement,nomEquipement,typeEquipement,dateFabrication);
@@ -130,12 +171,13 @@ void MainWindow::on_pb_ajouterMaintenance_clicked()
 {
     int idMaintenance=ui->id_maintenance->text().toInt();
         int frais=ui->frais_maintenance->text().toInt();
+        int fk_equipement=ui->frais_maintenance->text().toInt();
 
    QString dureeMaintenance=ui->duree_maintenance->text();
    QString dateEntreeM=ui->date_entree_maintenance->text();
    QString dateSortieM=ui->date_sortie_maintenance->text();
 
-        Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+        Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais,fk_equipement);
         bool test=M.ajouterMaintenance();
         QMessageBox msgBox;
 
@@ -151,18 +193,19 @@ void MainWindow::on_pb_ajouterMaintenance_clicked()
 void MainWindow::on_tab_equipement_activated(const QModelIndex &index)
 {
     QString val=ui->tab_equipement->model()->data(index).toString();
+
     QSqlQuery query;
     query.prepare("select* from equipement where idEquipement='"+val+"' ");
     if (query.exec())
     { while(query.next())
         {
             ui->le_id->setText(query.value(0).toString());
-            ui->le_id_supp->setText(query.value(0).toString());
+
             ui->le_nom->setText(query.value(1).toString());
             ui->le_type->setText(query.value(2).toString());
             ui->la_quantite->setText(query.value(3).toString());
             ui->le_etat->setText(query.value(4).toString());
-            ui->la_date->setText(query.value(5).toString());
+          //  ui->la_date->setText(query.value(5).toString());
           }
 
      }
@@ -362,7 +405,7 @@ void MainWindow::on_tab_maintenance_activated(const QModelIndex &index)
 void MainWindow::on_pushButton_supprimer_maintenance_clicked()
 {
     Maintenance M;
-       M.setIdMaintenance(ui->id_sup->text().toInt());
+       M.setIdMaintenance(ui->le_id->text().toInt());
         bool test=M.supprimerMaintenance(M.getIdMaintenance());
         QMessageBox msgBox;
 
@@ -380,17 +423,18 @@ void MainWindow::on_pushButton_modifier_maintenance_clicked()
 {
     int idMaintenance=ui->id_maintenance->text().toInt();
     int frais=ui->frais_maintenance->text().toInt();
+    int fk_equipement=ui->fk_equipement_equipement->text().toInt();
 
     QString dureeMaintenance=ui->duree_maintenance->text();
     QString dateEntreeM=ui->date_entree_maintenance->text();
     QString dateSortieM=ui->date_sortie_maintenance->text();
 
 
-  Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+  Maintenance M(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais,fk_equipement);
 
 
 
-      bool test=M.modifierMaintenance(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais);
+      bool test=M.modifierMaintenance(idMaintenance,dureeMaintenance,dateEntreeM,dateSortieM,frais,fk_equipement);
          QMessageBox msgBox;
 
          if(test)
@@ -426,7 +470,7 @@ void MainWindow::on_imprimer_clicked()
                     << "<title>ERP - COMmANDE LIST<title>\n "
                     << "</head>\n"
                     "<body bgcolor=#ffffff link=#5000A0>\n"
-                    "<h1 style=\"text-align: center;\"><strong> ****LISTE DES Factures **** "+TT+"</strong></h1>"
+                    "<h1 style=\"text-align: center;\"><strong> ****LISTE DES EQUIPEMENTS **** "+TT+"</strong></h1>"
                     "<table style=\"text-align: center; font-size: 20px;\" border=1>\n "
                       "</br> </br>";
                 // headers
@@ -463,4 +507,40 @@ void MainWindow::on_imprimer_clicked()
 
                 delete document;
 
+}
+
+
+
+/*void MainWindow::on_Petition_clicked()
+{
+
+}*/
+
+void MainWindow::on_Materiel_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2) ;
+           ui->Petition->setGeometry(-17,142,151,61);
+           ui->Materiel->setGeometry(-23,180,201,81);
+           ui->Agent->setGeometry(-14,246,151,51);
+           ui->Crimes->setGeometry(0,299,121,51);
+           ui->Plaintes->setGeometry(0,350,121,51);
+           ui->Mission->setGeometry(9,400,111,41);
+}
+
+void MainWindow::on_Agent_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3) ;
+           ui->Petition->setGeometry(-17,142,151,61);
+           ui->Materiel->setGeometry(-40,180,201,81);
+           ui->Agent->setGeometry(0,246,151,51);
+           ui->Crimes->setGeometry(0,299,121,51);
+           ui->Plaintes->setGeometry(0,350,121,51);
+           ui->Mission->setGeometry(9,400,111,41);
+}
+
+
+
+void MainWindow::on_pushButton_icon_upload_clicked()
+{
+     ui->tab_equipement->setModel(E.afficher());
 }

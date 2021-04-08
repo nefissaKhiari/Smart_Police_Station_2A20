@@ -1,6 +1,10 @@
 #ifndef STATS_H
 #define STATS_H
+#include <QtCharts>
+#include <QChartView>
 
+#include<QBarSet>
+#include<QBarSeries>
 #include <QDialog>
 #include <iostream>
 #include <QApplication>

@@ -7,6 +7,8 @@
 #include <QtCharts>
 #include <QChartView>
 #include<QPieSeries>
+#include<QBarSet>
+#include<QBarSeries>
 #include<QPrinter>
 #include<QPrintDialog>
 
@@ -60,6 +62,16 @@ private slots:
     void on_pushButton_modifier_maintenance_clicked();
 
     void on_imprimer_clicked();
+
+
+
+    void on_Petition_clicked();
+
+    void on_Materiel_clicked();
+
+    void on_Agent_clicked();
+
+    void on_pushButton_icon_upload_clicked();
 
 private:
     Ui::MainWindow *ui;
