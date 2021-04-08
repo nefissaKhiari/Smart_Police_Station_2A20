@@ -113,7 +113,7 @@
        </font>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="widget">
        <attribute name="icon">
@@ -121,7 +121,7 @@
          <normaloff>../../Downloads/téléchargement.png</normaloff>../../Downloads/téléchargement.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>Pétition</string>
+        <string>service</string>
        </attribute>
        <widget class="QPushButton" name="ajouterimage">
         <property name="geometry">
@@ -156,7 +156,7 @@ border-radius:10px;</string>
          </rect>
         </property>
         <property name="text">
-         <string>ID_pétition</string>
+         <string>ID_service</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_5">
@@ -178,11 +178,11 @@ border-radius:10px;</string>
           <x>30</x>
           <y>133</y>
           <width>47</width>
-          <height>13</height>
+          <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Auteur:</string>
+         <string>agents</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_11">
@@ -547,7 +547,7 @@ border-radius:10px;</string>
          </rect>
         </property>
         <property name="text">
-         <string>nb signatures </string>
+         <string>prix service</string>
         </property>
        </widget>
       </widget>
@@ -557,7 +557,7 @@ border-radius:10px;</string>
          <normaloff>../../Downloads/48175.png</normaloff>../../Downloads/48175.png</iconset>
        </attribute>
        <attribute name="title">
-        <string>citoyen</string>
+        <string>agent</string>
        </attribute>
        <widget class="QLabel" name="policou">
         <property name="geometry">
@@ -610,7 +610,7 @@ border-radius:10px;</string>
          </rect>
         </property>
         <property name="text">
-         <string>Cin_citoyen :</string>
+         <string>Cin_agent :</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_25">
@@ -978,7 +978,7 @@ border-radius:10px;</string>
         </property>
         <item>
          <property name="text">
-          <string>cin_citoyen</string>
+          <string>cin_agent</string>
          </property>
         </item>
         <item>
@@ -1028,7 +1028,7 @@ border-radius:10px;</string>
          </rect>
         </property>
         <property name="text">
-         <string>etat_civil</string>
+         <string>service </string>
         </property>
        </widget>
        <widget class="QPushButton" name="ajouter_image">
