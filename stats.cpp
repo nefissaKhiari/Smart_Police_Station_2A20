@@ -1,7 +1,11 @@
 #include "stats.h"
 
 #include "ui_stats.h"
+#include <QtCharts>
+#include <QChartView>
 
+#include<QBarSet>
+#include<QBarSeries>
 stats::stats(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::stats)
@@ -15,8 +19,8 @@ stats::~stats()
 }
 
 
-        void stats::Statistique()
-      { QPieSeries *series = new QPieSeries();
+       // void stats::Statistique()
+    /*  {
             QSqlQuery query;
         int count=0 ;
         QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
@@ -33,17 +37,36 @@ stats::~stats()
           {
                   count1++ ;
           }
-          series->append("femme",count);
-          series->append("homme",count1);
+          QBarSet *set0= new QBarSet(" Nombre des femmes");
+          QBarSet *set1= new QBarSet("Nombre des hommes");
 
-          QChart * chart =new QChart();
-          chart-> addSeries(series);
-          chart->setTitle("Statistiques des Detenus par Sexe ");
 
-          QChartView *chartview= new QChartView (chart);
-          chartview->setParent(ui->frame_charts);
+                      *set0 <<count ;
+                      *set1<<count1;
+
+                      QBarSeries *series= new QBarSeries();
+                        series->append(set0);
+                          series->append(set1);
+
+
+                     QChart * chart =new QChart();
+                        chart-> addSeries(series);
+                        chart->setTitle("Statistiques des detenus par rapport au sexe ");
+                        chart->setAnimationOptions(QChart::SeriesAnimations);
+                      QStringList categories;
+                      categories <<"Jan"<<"Feb"<<"Mar"<<"Apr"<<"May"<<"Jul";
+                      QBarCategoryAxis *axis= new QBarCategoryAxis();
+                      axis->append(categories);
+                      chart->createDefaultAxes();
+                      chart->setAxisX(axis,series);
+
+
+
+
+                      QChartView *chartview= new QChartView (chart);
+                       chartview->setParent(ui->frame_charts);
         }
-
+*/
 
 
 
@@ -213,9 +236,9 @@ void stats::paintEvent(QPaintEvent *)
 }
 
 */
-void stats::on_hide_clicked()
+/*void stats::on_hide_clicked()
 {
     hide();
-}
+}*/
 
 

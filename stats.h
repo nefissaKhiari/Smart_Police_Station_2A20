@@ -5,21 +5,13 @@
 #include <iostream>
 #include <QApplication>
 #include <QMainWindow>
-/*#include <QtCharts/QChartView>
-#include <QtCharts/QBarSeries>
-#include <QtCharts/QBarSet>
-#include <QtCharts/QLegend>
-#include <QtCharts/QBarCategoryAxis>
-#include <QtCharts/QHorizontalStackedBarSeries>
-#include <QtCharts/QLineSeries>
-#include <QtCharts/QCategoryAxis>
-#include <QtCharts/QPieSeries>
-#include <QtCharts/QPieSlice>*/
 #include <QPainter>
 #include <QSqlQuery>
 #include <QtCharts>
 #include <QChartView>
 #include<QPieSeries>
+#include<QBarSet>
+#include<QBarSeries>
 using namespace std;
 QT_CHARTS_USE_NAMESPACE
 namespace Ui {
@@ -32,14 +24,14 @@ class stats : public QDialog
 
 public:
     explicit stats(QWidget *parent = nullptr);
-    void Statistique() ;
+    //void Statistique() ;
        /*int Statistique_partie3() ;
        int Statistique_partie4() ;
         void paintEvent(QPaintEvent *) ;*/
     ~stats();
 
 private slots:
-    void on_hide_clicked();
+  //  void on_hide_clicked();
 
    // void on_pushButton_clicked();
 

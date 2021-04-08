@@ -12,8 +12,6 @@
 #include<QDesktopServices>
 #include<QUrl>
 #include <QtWidgets>
-
-//#include <QUrDesktopServices>
 #include "stats.h"
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -21,38 +19,55 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-   ui->le_id->setValidator( new QIntValidator(0, 999, this));
+   ui->le_id->setValidator( new QIntValidator(0, 99, this));
+   ui->le_id_2->setValidator( new QIntValidator(0, 99, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
    ui->tab_cellule->setModel(C.afficher_cellule());
-
-   /*QPieSeries *series = new QPieSeries();
-
-         QSqlQuery query;
-           int count=0 ;
-           QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
-           while(requete.next())
-           {
-                   count++ ;
-           }
-
-           QSqlQuery query1;
-             int count1=0 ;
-             QSqlQuery requete1("select * from detenu where sexe_detenu='homme'") ;
-             while(requete1.next())
-             {
-                     count1++ ;
-             }
+   QSqlQuery query;
+int count=0 ;
+QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
+while(requete.next())
+{
+       count++ ;
+}
 
 
-       series->append("femme",count);
-       series->append("homme",count1);
+QSqlQuery query1;
+ int count1=0 ;
+ QSqlQuery requete1("select * from detenu where sexe_detenu='homme'") ;
+ while(requete1.next())
+ {
+         count1++ ;
+ }
+ QBarSet *set0= new QBarSet(" Nombre des femmes");
+ QBarSet *set1= new QBarSet("Nombre des hommes");
 
-       QChart * chart =new QChart();
-       chart-> addSeries(series);
-       chart->setTitle("Statistiques des Detenus par Sexe ");
 
-       QChartView *chartview= new QChartView (chart);
-       chartview->setParent(ui->frame_charts);*/
+             *set0 <<count ;
+             *set1<<count1;
+
+             QBarSeries *series= new QBarSeries();
+               series->append(set0);
+                 series->append(set1);
+
+
+            QChart * chart =new QChart();
+               chart-> addSeries(series);
+               chart->setTitle("Statistiques des detenus par rapport au sexe ");
+               chart->setAnimationOptions(QChart::SeriesAnimations);
+             QStringList categories;
+             categories <<"Jan"<<"Feb"<<"Mar"<<"Apr"<<"May"<<"Jul";
+             QBarCategoryAxis *axis= new QBarCategoryAxis();
+             axis->append(categories);
+             chart->createDefaultAxes();
+             chart->setAxisX(axis,series);
+
+
+
+
+             QChartView *chartview= new QChartView (chart);
+              chartview->setParent(ui->frame_charts);
+
 }
 
 
@@ -76,9 +91,9 @@ void MainWindow::on_pb_ajouter_clicked()
     int poids_detenu=ui->le_poids->text().toInt();
     QString periode_detenu=ui->la_periode->text();
     QString dossier_detenu=ui->le_dossier->text();
+    int id_cellule=ui->le_id_cellule->text().toInt();
 
-
-    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
+    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,id_cellule);
     bool test=D.ajouter_detenu();
     QMessageBox msgBox;
 
@@ -119,10 +134,10 @@ void MainWindow::on_pb_modifier_clicked()
     int poids_detenu=ui->le_poids->text().toInt();;
     QString periode_detenu=ui->la_periode->text();
     QString dossier_detenu=ui->le_dossier->text();
+    int id_cellule=ui->le_id_cellule->text().toInt();
 
-
-    Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
-     bool test=Det.modifier_detenu(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu());
+    Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,id_cellule);
+     bool test=Det.modifier_detenu(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu(),Det.getid_cellule());
      QMessageBox msgBox;
 
      if(test)
@@ -153,6 +168,7 @@ void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
                 ui->le_poids->setText(query.value(7).toString());
                 ui->la_periode->setText(query.value(8).toString());
                 ui->le_dossier->setText(query.value(9).toString());
+                ui->le_id_cellule->setText(query.value(10).toString());
 
               }
 }
@@ -244,12 +260,8 @@ void MainWindow::on_modifier_cellule_clicked()
 
 }
 
-/*void MainWindow::on_pushButton_6_clicked()
-{
-    ui->tab_cellule->setModel(tmpcellule.tri_cellule());
-    ui->tab_cellule->setModel(tmpcellule.tri_cellule());//refresh
-}*/
 
+/*
 void MainWindow::on_pdf_detenu_clicked()
 {
 
@@ -307,7 +319,7 @@ void MainWindow::on_pdf_detenu_clicked()
                                       {
                                            painter.end();
                                       }
-}
+}*/
 
 void MainWindow::on_pb_trier_cellule_clicked()
 {
@@ -323,48 +335,9 @@ void MainWindow::on_pb_trier_cellule_clicked()
             ui->tab_cellule->setModel(tmpcellule.tri_nb_lits());
 }
 }
-/*void MainWindow::on_pb_rechercher_cellule_clicked()
-{
-    QString type = ui->comboBox_recherche->currentText();
-        QString valeur = ui->recher_cellule->currentText();
-        bool test = false, test1 = false, test2 = false;
-        if (type == "id_cellule")
-            test = tmpcellule.recherche_id_cellule(valeur);
-        else if (type == "type_cellule")
-            test1 = tmpcellule.recherche_type_cellule(valeur);
-        else if (type == "nb_detenus")
-            test2 = tmpcellule.recherche_nb_detenus(valeur);
 
-        if (test || test1 || test2)
-        {
-            int id_cellule = tmpcellule.getid_cellule();
-            QString type_cellule = tmpcellule.gettype_cellule();
-            int nb_lits = tmpcellule.getnb_detenus();
-            int superficie_cellule = tmpcellule.getsuperficie_cellule();
-            int nb_detenus = tmpcellule.getnb_detenus();
 
-            ui->recher_cellule->setCurrentText(id_cellule);
-            ui->comboBox_mail_4->setCurrentText(email);
-            ui->comboBox_film_3->setCurrentText(film);
-            ui->spinBox_quantite_4->setValue(quantite);
-            ui->spinBox_remise_3->setValue(remise);
-            ui->comboBox_salle_3->setCurrentText(salle);
-            ui->sieges_3->setText(siege);
-            ui->spinBox_prix_3->setValue(prix);
-            ui->dateEdit_billet->setDate(QDate::fromString(date,"MM/dd/yyyy"));
-            ui->timeEdit_billet->setTime(QTime::fromString(heure,"hh:mm"));
-            ui->comboBox_tarif_3->setCurrentText(tarif);
-        }
-    }
-*/
 
-void MainWindow::on_pushButton_clicked()
-{
-    stats stat;
-    stat.Statistique();
-    stat.setModal(true);
-    stat.exec();
-}
 void MainWindow::on_pb_rechercher_cellule_clicked()
 {
     QString res=ui->recher_cellule->text();
@@ -390,8 +363,8 @@ void MainWindow::on_imprimer_clicked()
                     << "<title>ERP - COMmANDE LIST<title>\n "
                     << "</head>\n"
                     "<body bgcolor=#ffffff link=#5000A0>\n"
-                    "<h1 style=\"text-align: center;\"><strong> ****LISTE DES Factures **** "+TT+"</strong></h1>"
-                    "<table style=\"text-align: center; font-size: 20px;\" border=1>\n "
+                    "<h1 style=\"text-align: center;\"><strong> ****LISTE DES DETENUS **** "+TT+"</strong></h1>"
+                    "<table style=\"text-align: center; font-size: 12px;\" border=1>\n "
                       "</br> </br>";
                 // headers
                 out << "<thead><tr bgcolor=#d6e5ff>";
@@ -428,3 +401,93 @@ void MainWindow::on_imprimer_clicked()
                 delete document;
 
 }
+
+
+
+void MainWindow::on_Petition_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(1) ;
+        ui->Petition->setGeometry(0,142,151,61);
+        ui->Materiel->setGeometry(-40,180,201,81);
+        ui->Agent->setGeometry(-14,246,151,51);
+        ui->Crimes->setGeometry(0,299,121,51);
+       ui->Plaintes->setGeometry(0,350,121,51);
+        ui->Mission->setGeometry(9,400,111,41);
+}
+
+
+
+void MainWindow::on_Materiel_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(2) ;
+       ui->Petition->setGeometry(-17,142,151,61);
+       ui->Materiel->setGeometry(-23,180,201,81);
+       ui->Agent->setGeometry(-14,246,151,51);
+       ui->Crimes->setGeometry(0,299,121,51);
+       ui->Plaintes->setGeometry(0,350,121,51);
+       ui->Mission->setGeometry(9,400,111,41);
+}
+
+void MainWindow::on_Agent_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(3) ;
+       ui->Petition->setGeometry(-17,142,151,61);
+       ui->Materiel->setGeometry(-40,180,201,81);
+       ui->Agent->setGeometry(0,246,151,51);
+       ui->Crimes->setGeometry(0,299,121,51);
+      ui->Plaintes->setGeometry(0,350,121,51);
+       ui->Mission->setGeometry(9,400,111,41);
+}
+
+void MainWindow::on_Crimes_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4) ;
+      ui->Petition->setGeometry(-17,142,151,61);
+      ui->Materiel->setGeometry(-40,180,201,81);
+      ui->Agent->setGeometry(-14,246,151,51);
+      ui->Crimes->setGeometry(17,299,121,51);
+      ui->Plaintes->setGeometry(0,350,121,51);
+      ui->Mission->setGeometry(9,400,111,41);
+}
+
+void MainWindow::on_Plaintes_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5) ;
+        ui->Petition->setGeometry(-17,142,151,61);
+        ui->Materiel->setGeometry(-40,180,201,81);
+        ui->Agent->setGeometry(-14,246,151,51);
+        ui->Crimes->setGeometry(0,299,121,51);
+        ui->Plaintes->setGeometry(17,350,121,51);
+        ui->Mission->setGeometry(9,400,111,41);
+}
+
+
+
+/*
+void MainWindow::on_Statistique_clicked()
+{
+    stats stat;
+    stat.Statistique();
+    stat.setModal(true);
+    stat.exec();
+}
+*/
+void MainWindow::on_Mission_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(6) ;
+      ui->Petition->setGeometry(-17,142,151,61);
+      ui->Materiel->setGeometry(-40,180,201,81);
+      ui->Agent->setGeometry(-14,246,151,51);
+      ui->Crimes->setGeometry(0,299,121,51);
+      ui->Plaintes->setGeometry(0,350,121,51);
+      ui->Mission->setGeometry(26,400,111,41);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+
+
+    ui->tab_cellule->setModel(C.afficher_cellule());
+}
+
+

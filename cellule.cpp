@@ -101,7 +101,7 @@ QSqlQueryModel* Cellule::tri_nb_detenus()// triii
 QSqlQueryModel* Cellule::tri_id_cellule()// triii
 {
     QSqlQueryModel* model=new QSqlQueryModel() ;
-    QSqlQuery *query=new QSqlQuery;
+    QSqlQuery *query=new QSqlQuery;// exécuter et mannipuler les instructions
     query->prepare("select * from cellule order by id_cellule asc") ;
     query->exec() ;
     model->setQuery(*query) ;
@@ -140,7 +140,7 @@ QSqlQueryModel * Cellule::tri_cellule()
 QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
 {
     QSqlQueryModel * model= new QSqlQueryModel();
-    model->setQuery("select * from cellule where id_cellule='"+rech+"' ");
+    model->setQuery("select * from cellule where id_cellule like '%"+rech+"%' ");
     model->setHeaderData(0, Qt::Horizontal, QObject::tr("Id cellule"));
     model->setHeaderData(1, Qt::Horizontal, QObject::tr("Type cellule"));
     model->setHeaderData(2, Qt::Horizontal, QObject::tr("Nb lits"));
@@ -148,71 +148,4 @@ QSqlQueryModel * Cellule::rechercher_cellule(QString rech)
     model->setHeaderData(4, Qt::Horizontal, QObject::tr("Nb detenus"));
         return model;
 }
-
-/*bool Cellule::recherche_id_cellule(QString valeur)
-{
-    QSqlQuery query;
-
-    query.prepare("Select * from cellule id_cellule=:id_cellule");
-    query.bindValue(":id_cellule",valeur);
-    if (query.exec())
-    {
-        while (query.next()){
-
-            //            qDebug()<<"find";
-            this -> id_cellule = (query.value(0).toInt());
-            this -> type_cellule = (query.value(1).toString());
-            this -> nb_lits =(query.value(2).toInt());
-            this -> superficie_cellule = (query.value(3).toInt());
-            this -> nb_detenus = (query.value(4).toInt());
-
-        }
-
-    }
-    return query.exec();
-}
-
-bool Cellule::recherche_type_cellule(QString valeur)
-{
-    QSqlQuery query;
-
-    query.prepare("Select * from cellule where type_cellule=:type_cellule");
-    query.bindValue(":type_cellule",valeur);
-    if (query.exec())
-    {
-        while (query.next()){
-
-            //            qDebug()<<"find";
-            this -> id_cellule = (query.value(0).toInt());
-            this -> type_cellule = (query.value(1).toString());
-            this -> nb_lits =(query.value(2).toInt());
-            this -> superficie_cellule = (query.value(3).toInt());
-            this -> nb_detenus = (query.value(4).toInt());
-        }
-    }
-
-    return query.exec();
-}
-
-bool Cellule::recherche_nb_detenus(QString valeur)
-{
-    QSqlQuery query;
-
-    query.prepare("Select * from cellule where nb_detenus=:nb_detenus");
-    query.bindValue(":nb_detenus",valeur);
-    if (query.exec())
-    {
-        while (query.next()){
-
-            //            qDebug()<<"find";
-            this -> id_cellule = (query.value(0).toInt());
-            this -> type_cellule = (query.value(1).toString());
-            this -> nb_lits =(query.value(2).toInt());
-            this -> superficie_cellule = (query.value(3).toInt());
-            this -> nb_detenus = (query.value(4).toInt());
-        }
-    }
-    return query.exec();
-
-}*/
 

@@ -33,6 +33,7 @@ CONFIG += c++11
 SOURCES += \
     cellule.cpp \
     detenu.cpp \
+    login.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
@@ -41,11 +42,13 @@ SOURCES += \
 HEADERS += \
     cellule.h \
     detenu.h \
+    login.h \
         mainwindow.h \
     connection.h \
     stats.h
 
 FORMS += \
+        login.ui \
         mainwindow.ui \
         stats.ui
 
