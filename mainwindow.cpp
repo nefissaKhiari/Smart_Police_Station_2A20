@@ -13,7 +13,8 @@
 #include<QUrl>
 #include <QtWidgets>
 #include "stats.h"
-
+#include "connection.cpp"
+#include "main.cpp"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -91,9 +92,10 @@ void MainWindow::on_pb_ajouter_clicked()
     int poids_detenu=ui->le_poids->text().toInt();
     QString periode_detenu=ui->la_periode->text();
     QString dossier_detenu=ui->le_dossier->text();
-    int id_cellule=ui->le_id_cellule->text().toInt();
+   // QString id_cellule=ui->comboBox->currentText();
+    //int id_cellule=ui->le_id_cellule->text().toInt();
 
-    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,id_cellule);
+    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu/*,id_cellule*/);
     bool test=D.ajouter_detenu();
     QMessageBox msgBox;
 
@@ -134,10 +136,10 @@ void MainWindow::on_pb_modifier_clicked()
     int poids_detenu=ui->le_poids->text().toInt();;
     QString periode_detenu=ui->la_periode->text();
     QString dossier_detenu=ui->le_dossier->text();
-    int id_cellule=ui->le_id_cellule->text().toInt();
+   // int id_cellule=ui->le_id_cellule->text().toInt();
 
-    Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,id_cellule);
-     bool test=Det.modifier_detenu(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu(),Det.getid_cellule());
+    Detenu Det(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu/*id_cellule*/);
+     bool test=Det.modifier_detenu(Det.getid_detenu(),Det.getnom_detenu(),Det.getprenom_detenu(),Det.getdate_naissance_detenu(),Det.getnationalite_detenu(),Det.getsexe_detenu(),Det.gettaille_detenu(),Det.getpoids_detenu(),Det.getperiode_detenu(),Det.getdossier_detenu()/*,Det.getid_cellule()*/);
      QMessageBox msgBox;
 
      if(test)
@@ -168,7 +170,7 @@ void MainWindow::on_tab_detenu_activated(const QModelIndex &index)
                 ui->le_poids->setText(query.value(7).toString());
                 ui->la_periode->setText(query.value(8).toString());
                 ui->le_dossier->setText(query.value(9).toString());
-                ui->le_id_cellule->setText(query.value(10).toString());
+              //  ui->le_id_cellule->setText(query.value(10).toString());
 
               }
 }
@@ -348,59 +350,66 @@ void MainWindow::on_pb_rechercher_cellule_clicked()
 
 
 
-
 void MainWindow::on_imprimer_clicked()
 {
-        QString strStream;
-                QTextStream out(&strStream);
 
-                const int rowCount = ui->tab_detenu->model()->rowCount();
-                const int columnCount = ui->tab_detenu->model()->columnCount();
-                QString TT = QDate::currentDate().toString("yyyy/MM/dd");
-                out <<"<html>\n"
-                      "<head>\n"
-                       "<meta Content=\"Text/html; charset=Windows-1251\">\n"
-                    << "<title>ERP - COMmANDE LIST<title>\n "
-                    << "</head>\n"
-                    "<body bgcolor=#ffffff link=#5000A0>\n"
-                    "<h1 style=\"text-align: center;\"><strong> ****LISTE DES DETENUS **** "+TT+"</strong></h1>"
-                    "<table style=\"text-align: center; font-size: 12px;\" border=1>\n "
-                      "</br> </br>";
-                // headers
-                out << "<thead><tr bgcolor=#d6e5ff>";
-                for (int column = 0; column < columnCount; column++)
-                    if (!ui->tab_detenu->isColumnHidden(column))
-                        out << QString("<th>%1</th>").arg(ui->tab_detenu->model()->headerData(column, Qt::Horizontal).toString());
-                out << "</tr></thead>\n";
+    QString strStream;
+     QTextStream out(&strStream);
+     const int rowCount = ui->tab_detenu->model()->rowCount();
+     const int columnCount = ui->tab_detenu->model()->columnCount();
+                     QString TT = QDate::currentDate().toString("yyyy/MM/dd");
 
-                // data table
-                for (int row = 0; row < rowCount; row++) {
-                    out << "<tr>";
-                    for (int column = 0; column < columnCount; column++) {
-                        if (!ui->tab_detenu->isColumnHidden(column)) {
-                            QString data =ui->tab_detenu->model()->data(ui->tab_detenu->model()->index(row, column)).toString().simplified();
-                            out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
-                        }
-                    }
-                    out << "</tr>\n";
-                }
-                out <<  "</table>\n"
-                    "</body>\n"
-                    "</html>\n";
+                     out <<  "<html>\n"
+                         "<head>\n"
+                         "<meta Content=\"Text/html; charset=Windows-1251\">\n"
+                         <<  QString("<title>%1</title>\n").arg("strTitle")
+                         <<  "</head>\n"
+                         "<body bgcolor=#ffffff link=#5000A0>\n"
 
-                QTextDocument *document = new QTextDocument();
-                document->setHtml(strStream);
+                        //     "<align='right'> " << datefich << "</align>"
+                             "<img src='C:/Users/ASUS/Desktop/Smart_Police_Station_2A20 final2/ifinal/Logo.png' width='300' height='150'>"
 
-                QPrinter printer;
 
-                QPrintDialog *baba = new QPrintDialog(&printer, NULL);
-                if (baba->exec() == QDialog::Accepted) {
-                    document->print(&printer);
-                }
+                         "<center> <H1>Liste des detenus "+TT+" </H1></br></br><table border=1 cellspacing=0 cellpadding=2>\n";
 
-                delete document;
+                     // headers
+                     out << "<thead><tr bgcolor=#FF2E01> <th>Numero</th>";
+                     for (int column = 0; column < columnCount; column++)
+                         if (!ui->tab_detenu->isColumnHidden(column))
+                             out << QString("<th>%1</th>").arg(ui->tab_detenu->model()->headerData(column, Qt::Horizontal).toString());
+                     out << "</tr></thead>\n";
 
+                     // data table
+                     for (int row = 0; row < rowCount; row++) {
+                         out << "<tr> <td bkcolor=0>" << row+1 <<"</td>";
+                         for (int column = 0; column < columnCount; column++) {
+                             if (!ui->tab_detenu->isColumnHidden(column)) {
+                                 QString data = ui->tab_detenu->model()->data(ui->tab_detenu->model()->index(row, column)).toString().simplified();
+                                 out << QString("<td bkcolor=0>%1</td>").arg((!data.isEmpty()) ? data : QString("&nbsp;"));
+
+
+                             }
+                         }
+                         out << "</tr>\n";
+                     }
+                     out <<  "</table> </center>\n";
+out << "<tr>\n"
+
+                         "</body>\n"
+                         "</html>\n";
+
+                     QTextDocument *document = new QTextDocument();
+                     document->setHtml(strStream);
+                     QPrinter printer;
+
+                     QPrintDialog *dialog = new QPrintDialog(&printer, nullptr);
+                     if (dialog->exec() == QDialog::Accepted) {
+                         document->print(&printer);
+                     }
+
+                     delete document;
 }
+
 
 
 
@@ -491,3 +500,22 @@ void MainWindow::on_pushButton_clicked()
 }
 
 
+/*
+void MainWindow::on_Load_clicked()
+{
+    Connection c;
+    QSqlQueryModel  * modal= new QSqlQueryModel();
+    c.createconnect();
+
+    QSqlQuery * query=new QSqlQuery (c.db);
+
+
+     query->prepare("select id_cellule from cellule");
+     query->exec();
+     modal->setQuery(*query);
+
+      ui->comboBox->setModel(modal);
+qDebug() <<(modal->rowCount());
+}
+
+*/

@@ -14,11 +14,11 @@ date_naissance_detenu="";
 nationalite_detenu="";sexe_detenu="";periode_detenu="";dossier_detenu="";
 taille_detenu=0;
 poids_detenu=0;
-id_cellule=0;
+//id_cellule=0;
 
 }
 
-Detenu::Detenu(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu ,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu,int id_cellule)
+Detenu::Detenu(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu ,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu/*int id_cellule*/)
 { this->id_detenu=id_detenu;
 this->nom_detenu=nom_detenu ;
 this->prenom_detenu=prenom_detenu;
@@ -29,7 +29,7 @@ this->taille_detenu=taille_detenu;
 this-> poids_detenu= poids_detenu;
 this->periode_detenu=periode_detenu ;
 this->dossier_detenu=dossier_detenu ;
-this->id_cellule=id_cellule ;
+//this->id_cellule=id_cellule ;
 }
 
 int Detenu::getid_detenu(){return id_detenu;};
@@ -42,7 +42,7 @@ int Detenu::gettaille_detenu(){return taille_detenu;};
 int Detenu::getpoids_detenu(){return poids_detenu;};
 QString Detenu::getperiode_detenu(){return periode_detenu ;};
 QString Detenu::getdossier_detenu(){return dossier_detenu ;};
-int Detenu::getid_cellule(){return id_cellule;};
+//int Detenu::getid_cellule(){return id_cellule;};
 
 void Detenu::setid_detenu(int id_detenu){this->id_detenu=id_detenu;}
 void Detenu::setnom_detenu(QString nom_detenu){this->nom_detenu=nom_detenu;}
@@ -54,7 +54,7 @@ void Detenu::settaille_detenu(int taille_detenu){this->taille_detenu=taille_dete
 void Detenu::setpoids_detenu(int poids_detenu){this->poids_detenu=poids_detenu;}
 void Detenu::setperiode_detenu(QString periode_detenu){this->periode_detenu=periode_detenu;}
 void Detenu::setdossier_detenu(QString dossier_detenu){this->nom_detenu=dossier_detenu;}
-void Detenu::setid_cellule(int id_cellule){this->id_cellule=id_cellule;}
+//void Detenu::setid_cellule(int id_cellule){this->id_cellule=id_cellule;}
 
 
 bool Detenu::ajouter_detenu()
@@ -63,9 +63,9 @@ bool Detenu::ajouter_detenu()
   QString id_detenu_string=QString::number(id_detenu);
   QString taille_detenu_string=QString::number(taille_detenu);
   QString poids_detenu_string=QString::number(poids_detenu);
-  QString id_cellule_string=QString::number(id_cellule);
-    query.prepare("INSERT INTO detenu (id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,id_cellule) "
-                  "VALUES (:id_detenu, :nom_detenu, :prenom_detenu,:date_naissance_detenu,:nationalite_detenu,:sexe_detenu,:taille_detenu,:poids_detenu,:periode_detenu,:dossier_detenu,:id_cellule)");
+ // QString id_cellule_string=QString::number(id_cellule);
+    query.prepare("INSERT INTO detenu (id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,/*id_cellule*/) "
+                  "VALUES (:id_detenu, :nom_detenu, :prenom_detenu,:date_naissance_detenu,:nationalite_detenu,:sexe_detenu,:taille_detenu,:poids_detenu,:periode_detenu,:dossier_detenu,:/*id_cellule*/)");
     query.bindValue(":id_detenu", id_detenu_string);
     query.bindValue(":nom_detenu", nom_detenu);
     query.bindValue(":prenom_detenu", prenom_detenu);
@@ -76,20 +76,20 @@ bool Detenu::ajouter_detenu()
     query.bindValue(":poids_detenu",poids_detenu_string);
     query.bindValue(":periode_detenu",periode_detenu);
     query.bindValue(":dossier_detenu",dossier_detenu);
-    query.bindValue(":id_cellule", id_cellule_string);
+    //query.bindValue(":id_cellule", id_cellule_string);
     return query.exec();
 
 }
 
-bool Detenu::modifier_detenu(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu,int )
+bool Detenu::modifier_detenu(int id_detenu,QString nom_detenu,QString prenom_detenu,QString date_naissance_detenu,QString nationalite_detenu ,QString sexe_detenu,int taille_detenu,int poids_detenu,QString periode_detenu,QString dossier_detenu )
 {
     QSqlQuery query;
     QString id_detenu_string=QString::number(id_detenu);
     QString taille_detenu_string=QString::number(taille_detenu);
     QString poids_detenu_string=QString::number(poids_detenu);
-    QString id_cellule_string=QString::number(id_cellule);
+   // QString id_cellule_string=QString::number(id_cellule);
 
-    query.prepare("update detenu set id_detenu='"+id_detenu_string+"', nom_detenu='"+nom_detenu+"',prenom_detenu='"+prenom_detenu+"',date_naissance_detenu='"+date_naissance_detenu+"',nationalite_detenu='"+nationalite_detenu+"',sexe_detenu='"+sexe_detenu+"',taille_detenu='"+taille_detenu_string+"',poids_detenu='"+poids_detenu_string+"',periode_detenu='"+periode_detenu+"',dossier_detenu='"+dossier_detenu+"',id_cellule='"+id_cellule_string+"' where id_detenu=:id_detenu");
+    query.prepare("update detenu set id_detenu='"+id_detenu_string+"', nom_detenu='"+nom_detenu+"',prenom_detenu='"+prenom_detenu+"',date_naissance_detenu='"+date_naissance_detenu+"',nationalite_detenu='"+nationalite_detenu+"',sexe_detenu='"+sexe_detenu+"',taille_detenu='"+taille_detenu_string+"',poids_detenu='"+poids_detenu_string+"',periode_detenu='"+periode_detenu+"',dossier_detenu='"+dossier_detenu+"' where id_detenu=:id_detenu");
     query.bindValue(0, id_detenu_string);
     query.bindValue(1, nom_detenu);
     query.bindValue(2, prenom_detenu);
@@ -100,7 +100,7 @@ bool Detenu::modifier_detenu(int id_detenu,QString nom_detenu,QString prenom_det
     query.bindValue(7, poids_detenu_string);
     query.bindValue(8, periode_detenu);
     query.bindValue(9, dossier_detenu);
-    query.bindValue(10, id_cellule_string);
+   // query.bindValue(10, id_cellule_string);
     return query.exec();
 }
 bool Detenu::supprimer_detenu(int id_detenu)
@@ -127,7 +127,7 @@ QSqlQueryModel* Detenu::afficher_detenu()
          model->setHeaderData(7, Qt::Horizontal, QObject::tr("Poids detenu"));
          model->setHeaderData(8, Qt::Horizontal, QObject::tr("Periode detenu"));
          model->setHeaderData(9, Qt::Horizontal, QObject::tr("Dossier detenu"));
-         model->setHeaderData(10, Qt::Horizontal, QObject::tr("Id Cellule"));
+         //model->setHeaderData(10, Qt::Horizontal, QObject::tr("Id Cellule"));
 
 
     return model;

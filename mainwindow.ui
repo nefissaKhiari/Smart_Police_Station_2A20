@@ -98,7 +98,7 @@ border-radius:10px;
          </rect>
         </property>
         <property name="currentIndex">
-         <number>0</number>
+         <number>1</number>
         </property>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
@@ -259,16 +259,6 @@ border-radius:10px;
             <rect>
              <x>370</x>
              <y>110</y>
-             <width>113</width>
-             <height>20</height>
-            </rect>
-           </property>
-          </widget>
-          <widget class="QLineEdit" name="le_id_cellule">
-           <property name="geometry">
-            <rect>
-             <x>370</x>
-             <y>140</y>
              <width>113</width>
              <height>20</height>
             </rect>
@@ -458,6 +448,36 @@ border-radius:10px;</string>
            </property>
            <property name="text">
             <string>Supprimer</string>
+           </property>
+          </widget>
+          <widget class="QComboBox" name="comboBox">
+           <property name="geometry">
+            <rect>
+             <x>370</x>
+             <y>140</y>
+             <width>111</width>
+             <height>22</height>
+            </rect>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="Load">
+           <property name="geometry">
+            <rect>
+             <x>510</x>
+             <y>140</y>
+             <width>75</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+           </property>
+           <property name="text">
+            <string>Load</string>
            </property>
           </widget>
          </widget>
@@ -935,16 +955,17 @@ border-radius:10px;
    <widget class="QFrame" name="frame">
     <property name="geometry">
      <rect>
-      <x>40</x>
+      <x>30</x>
       <y>0</y>
-      <width>211</width>
-      <height>141</height>
+      <width>151</width>
+      <height>131</height>
      </rect>
     </property>
     <property name="styleSheet">
      <string notr="true">*{
 background-color :transparent;
-border-image:url(C:/Users/ASUS/Desktop/maquette/ifinal/Logo.png);
+border-image:url(C:/Users/ASUS/Desktop/Smart_Police_Station_2A20 final2/ifinal/Logo.png);
+
 }</string>
     </property>
     <property name="frameShape">
