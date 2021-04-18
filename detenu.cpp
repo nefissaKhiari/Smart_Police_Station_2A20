@@ -1,5 +1,4 @@
 #include "detenu.h"
-#include "stats.h"
 #include <QSqlQuery>
 #include <QtDebug>
 #include <QObject>

@@ -98,7 +98,7 @@ border-radius:10px;
          </rect>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="tab_4">
          <attribute name="title">
@@ -480,6 +480,27 @@ border-radius:10px;</string>
             <string>Load</string>
            </property>
           </widget>
+          <widget class="QPushButton" name="Video">
+           <property name="geometry">
+            <rect>
+             <x>510</x>
+             <y>290</y>
+             <width>81</width>
+             <height>23</height>
+            </rect>
+           </property>
+           <property name="styleSheet">
+            <string notr="true">background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;
+</string>
+           </property>
+           <property name="text">
+            <string>Video</string>
+           </property>
+          </widget>
          </widget>
         </widget>
         <widget class="QWidget" name="tab_8">
@@ -791,6 +812,26 @@ border-radius:10px;</string>
         </property>
         <property name="text">
          <string>refresh</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="excel">
+        <property name="geometry">
+         <rect>
+          <x>410</x>
+          <y>10</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+        </property>
+        <property name="text">
+         <string>Excel</string>
         </property>
        </widget>
       </widget>

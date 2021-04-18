@@ -7,6 +7,7 @@
 QT       += core gui sql printsupport
 QT       += core gui network charts
 QT       += core gui charts
+QT       += core gui multimedia multimediawidgets
 #QT       += pdf
 #QT += gui
 QT       += printsupport multimedia texttospeech
@@ -33,24 +34,29 @@ CONFIG += c++11
 SOURCES += \
     cellule.cpp \
     detenu.cpp \
+   # dialog.cpp \
+    exportexcelobject.cpp \
     login.cpp \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-    stats.cpp
+   # stats.cpp
 
 HEADERS += \
     cellule.h \
     detenu.h \
+    #dialog.h \
+  exportexcelobject.h \
     login.h \
         mainwindow.h \
     connection.h \
-    stats.h
+   # stats.h
 
 FORMS += \
+   # dialog.ui \
         login.ui \
         mainwindow.ui \
-        stats.ui
+       # stats.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

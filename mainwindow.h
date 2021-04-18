@@ -4,7 +4,11 @@
 #include <QMainWindow>
 #include "detenu.h"
 #include "cellule.h"
-
+#include <QtCharts>
+#include <QChartView>
+#include<QPieSeries>
+#include<QBarSet>
+#include<QBarSeries>
 //QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -69,6 +73,10 @@ private slots:
    // void on_pushButton_2_clicked();
 
    // void on_Load_clicked();
+
+    void on_excel_clicked();
+
+    void on_Video_clicked();
 
 private:
     Ui::MainWindow *ui;

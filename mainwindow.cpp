@@ -12,9 +12,11 @@
 #include<QDesktopServices>
 #include<QUrl>
 #include <QtWidgets>
-#include "stats.h"
-#include "connection.cpp"
-#include "main.cpp"
+#include <QMediaPlayer>
+#include <QVideoWidget>
+//#include "connection.cpp"
+//#include "main.cpp"
+#include "exportexcelobject.h"
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -68,6 +70,8 @@ QSqlQuery query1;
 
              QChartView *chartview= new QChartView (chart);
               chartview->setParent(ui->frame_charts);
+
+
 
 }
 
@@ -519,3 +523,45 @@ qDebug() <<(modal->rowCount());
 }
 
 */
+
+void MainWindow::on_excel_clicked()
+{
+    QString fileName = QFileDialog::getSaveFileName(this, tr("Excel file"), qApp->applicationDirPath (),
+                                                           tr("Excel Files (*.xls)"));
+           if (fileName.isEmpty())
+               return;
+
+           ExportExcelObject obj(fileName, "mydata", ui->tab_cellule);
+
+           //colums to export
+           obj.addField(0, "IdCellule", "char(20)");
+           obj.addField(1, "TypeCellule", "char(20)");
+           obj.addField(2, "Nblits", "char(20)");
+           obj.addField(3, "Superficie", "char(20)");
+           obj.addField(4, "Nbdetenus", "char(50)");
+
+
+
+
+
+
+           int retVal = obj.export2Excel();
+           if( retVal > 0)
+           {
+               QMessageBox::information(this, tr("Done"),
+                                        QString(tr("%1 records exported!")).arg(retVal)
+                                        );
+           }
+}
+
+void MainWindow::on_Video_clicked()
+{
+    QMediaPlayer* player=new QMediaPlayer;
+    QVideoWidget* Vw=new QVideoWidget;
+    player->setVideoOutput(Vw);
+    player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Downloads/Video.mpg"));
+    Vw->setGeometry(100,100,600,400);
+    Vw->show();
+    player->play();
+    qDebug()<<player->state();
+}
