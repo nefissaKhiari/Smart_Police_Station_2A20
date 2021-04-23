@@ -17,6 +17,9 @@
 //#include "connection.cpp"
 //#include "main.cpp"
 #include "exportexcelobject.h"
+#include <QPropertyAnimation>
+#include <QDateTime>
+#include <QTime>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -26,6 +29,24 @@ MainWindow::MainWindow(QWidget *parent) :
    ui->le_id_2->setValidator( new QIntValidator(0, 99, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
    ui->tab_cellule->setModel(C.afficher_cellule());
+   animation = new QPropertyAnimation (ui ->frame,"geometry" );
+                  // animation = new QPropertyAnimation (ui ->text_2,"geometry" );
+                   animation->setDuration(3000) ;
+                   animation->setStartValue(ui->frame->geometry());
+                   animation->setEndValue(QRect(1,5,200,140)) ;
+                   animation->start() ;
+
+                   /***************/
+                             QTimer *timer=new QTimer(this);
+                           connect(timer,SIGNAL(timeout()),this,SLOT(showtime()));
+                           timer->start();
+                           /*************************date*****************/
+                           QDate date = QDate ::currentDate();
+                           QString datee=date.toString();
+
+                           ui->Date_2->setText(datee) ;
+
+
    QSqlQuery query;
 int count=0 ;
 QSqlQuery requete("select * from detenu where sexe_detenu='femme'") ;
@@ -70,8 +91,17 @@ QSqlQuery query1;
 
              QChartView *chartview= new QChartView (chart);
               chartview->setParent(ui->frame_charts);
-
-
+//Arduino***************
+ int ret=A.connect_arduino(); // lancer la connexion à arduino
+    switch(ret){
+    case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
+        break;
+    case(1):qDebug() << "arduino is available but not connected to :" <<A.getarduino_port_name();
+       break;
+    case(-1):qDebug() << "arduino is not available";
+    }
+     QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
+     //le slot update_label suite à la reception du signal readyRead (reception des données).
 
 }
 
@@ -564,4 +594,17 @@ void MainWindow::on_Video_clicked()
     Vw->show();
     player->play();
     qDebug()<<player->state();
+}
+
+void MainWindow::showtime ()
+{
+    QTime time = QTime::currentTime();
+
+           QString time_text=time.toString("hh : mm : ss");
+           if((time.second() % 2) == 0 )
+           {
+               time_text[3] = ' ';
+               time_text[8] = ' ';
+           }
+           ui->digitalclock_2->setText(time_text) ;
 }

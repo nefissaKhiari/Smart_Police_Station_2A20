@@ -4,11 +4,14 @@
 #include <QMainWindow>
 #include "detenu.h"
 #include "cellule.h"
+#include "arduino.h"
 #include <QtCharts>
 #include <QChartView>
 #include<QPieSeries>
 #include<QBarSet>
 #include<QBarSeries>
+#include <QPropertyAnimation>
+#include <QLabel>
 //QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -77,12 +80,16 @@ private slots:
     void on_excel_clicked();
 
     void on_Video_clicked();
-
+    void showtime () ;
 private:
     Ui::MainWindow *ui;
    Detenu D;
 
        Cellule tmpcellule , C;
+       QByteArray data; // variable contenant les données reçues
+
+       arduino A; // objet temporaire
+QPropertyAnimation *animation;
 
 };
 

@@ -8,6 +8,8 @@ QT       += core gui sql printsupport
 QT       += core gui network charts
 QT       += core gui charts
 QT       += core gui multimedia multimediawidgets
+QT       += core gui  serialport
+#QT       += serialport
 #QT       += pdf
 #QT += gui
 QT       += printsupport multimedia texttospeech
@@ -32,6 +34,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
+    arduino.cpp \
     cellule.cpp \
     detenu.cpp \
    # dialog.cpp \
@@ -43,6 +46,7 @@ SOURCES += \
    # stats.cpp
 
 HEADERS += \
+    arduino.h \
     cellule.h \
     detenu.h \
     #dialog.h \
