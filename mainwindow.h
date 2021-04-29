@@ -6,6 +6,8 @@
 #include <QMainWindow>
 #include<QTimer>
 #include <QStaticText>
+#include <QSound>
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -79,6 +81,28 @@ private slots:
 
         void on_browseBtn_clicked();
 
+        //void on_label_photo_linkActivated(const QString &link);
+
+       // void on_validite_serv_activated(const QString &arg1);
+
+        void on_pushButton_10_clicked();
+
+       // void on_comboBox_agent_2_activated(const QString &arg1);
+
+        void on_comboBox_agent_3_activated(const QString &arg1);
+
+        void on_play_clicked();
+
+        void on_stop_clicked();
+
+       // void on_pushButton_12_clicked();
+
+       // void on_recherche_agent_cursorPositionChanged(int arg1, int arg2);
+
+        void on_pushButton_28_clicked();
+
+        void on_Objet_cursorPositionChanged(int arg1, int arg2);
+
 private:
     Ui::MainWindow *ui;
     agent tmp_agent ;
@@ -90,6 +114,8 @@ private:
         QByteArray array;
         QTimer * timerr ;
          QStringList files;
+         QSound *son;
+
 
 };
 #endif // MAINWINDOW_H

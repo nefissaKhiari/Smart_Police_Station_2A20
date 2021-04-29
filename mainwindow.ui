@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="Materiel">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>202</y>
+      <x>14</x>
+      <y>132</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -45,8 +45,8 @@ border-radius:0px;</string>
    <widget class="QPushButton" name="Agent">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>152</y>
+      <x>14</x>
+      <y>82</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -73,8 +73,8 @@ border-radius:0px;</string>
    <widget class="QPushButton" name="service">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>110</y>
+      <x>14</x>
+      <y>40</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -101,8 +101,8 @@ border-radius:0px;</string>
    <widget class="QPushButton" name="Crimes">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>282</y>
+      <x>14</x>
+      <y>212</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -129,8 +129,8 @@ border-radius:0px;</string>
    <widget class="QPushButton" name="Plaintes">
     <property name="geometry">
      <rect>
-      <x>210</x>
-      <y>242</y>
+      <x>14</x>
+      <y>172</y>
       <width>91</width>
       <height>31</height>
      </rect>
@@ -158,8 +158,8 @@ border-radius:0px;
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>306</x>
-      <y>70</y>
+      <x>110</x>
+      <y>0</y>
       <width>601</width>
       <height>481</height>
      </rect>
@@ -239,9 +239,9 @@ border-radius:0px;
      <widget class="QTabWidget" name="tabWidget">
       <property name="geometry">
        <rect>
-        <x>0</x>
-        <y>2</y>
-        <width>591</width>
+        <x>20</x>
+        <y>0</y>
+        <width>621</width>
         <height>481</height>
        </rect>
       </property>
@@ -254,7 +254,7 @@ border-radius:0px;
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="widget">
        <attribute name="icon">
@@ -290,8 +290,8 @@ border-radius:10px;</string>
        <widget class="QLabel" name="idservice">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>73</y>
+          <x>10</x>
+          <y>60</y>
           <width>81</width>
           <height>16</height>
          </rect>
@@ -303,34 +303,34 @@ border-radius:10px;</string>
        <widget class="QLabel" name="label_5">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>103</y>
+          <x>10</x>
+          <y>90</y>
           <width>47</width>
           <height>13</height>
          </rect>
         </property>
         <property name="text">
-         <string>Titre :</string>
+         <string>libelle:</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_8">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>133</y>
+          <x>10</x>
+          <y>120</y>
           <width>47</width>
           <height>13</height>
          </rect>
         </property>
         <property name="text">
-         <string>Auteur:</string>
+         <string>agent:</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_11">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>163</y>
+          <x>10</x>
+          <y>150</y>
           <width>47</width>
           <height>13</height>
          </rect>
@@ -343,7 +343,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>71</y>
+          <y>60</y>
           <width>121</width>
           <height>20</height>
          </rect>
@@ -353,7 +353,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>101</y>
+          <y>90</y>
           <width>121</width>
           <height>20</height>
          </rect>
@@ -363,7 +363,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>131</y>
+          <y>120</y>
           <width>121</width>
           <height>20</height>
          </rect>
@@ -373,7 +373,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>161</y>
+          <y>150</y>
           <width>121</width>
           <height>22</height>
          </rect>
@@ -383,7 +383,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>248</x>
-          <y>110</y>
+          <y>100</y>
           <width>81</width>
           <height>16</height>
          </rect>
@@ -392,11 +392,11 @@ border-radius:10px;</string>
          <string>Description :</string>
         </property>
        </widget>
-       <widget class="QComboBox" name="validite_serv">
+       <widget class="QComboBox" name="genre_serv">
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>192</y>
+          <y>180</y>
           <width>121</width>
           <height>22</height>
          </rect>
@@ -406,42 +406,42 @@ border-radius:10px;</string>
         </property>
         <item>
          <property name="text">
-          <string>Validé</string>
+          <string>demande cin</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Non validé</string>
+          <string>demande passeport</string>
          </property>
         </item>
        </widget>
        <widget class="QLabel" name="label_23">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>191</y>
-          <width>51</width>
+          <x>10</x>
+          <y>180</y>
+          <width>111</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>Validité :</string>
+         <string>genre de service:</string>
         </property>
        </widget>
        <widget class="QTableView" name="tab_service">
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>271</y>
+          <y>260</y>
           <width>451</width>
-          <height>141</height>
+          <height>151</height>
          </rect>
         </property>
        </widget>
        <widget class="QPushButton" name="ajouter_service">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>480</x>
           <y>270</y>
           <width>92</width>
           <height>23</height>
@@ -462,7 +462,7 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="pushButton_26">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>480</x>
           <y>390</y>
           <width>92</width>
           <height>23</height>
@@ -483,7 +483,7 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="modifier_service">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>480</x>
           <y>300</y>
           <width>92</width>
           <height>23</height>
@@ -504,7 +504,7 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="supprimer_service">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>480</x>
           <y>330</y>
           <width>92</width>
           <height>23</height>
@@ -522,32 +522,11 @@ border-radius:10px;</string>
          <string>Supprimer</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="pushButton_28">
-        <property name="geometry">
-         <rect>
-          <x>10</x>
-          <y>240</y>
-          <width>92</width>
-          <height>23</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">
-background-color:white; 
-color: rgb(255, 0, 255);
-border-style:outset ; 
-border-width:3px ; 
-border-radius:10px;</string>
-        </property>
-        <property name="text">
-         <string>rechercher</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="pushButton_29">
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>240</y>
+          <x>180</x>
+          <y>230</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -567,8 +546,8 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="pushButton_33">
         <property name="geometry">
          <rect>
-          <x>210</x>
-          <y>240</y>
+          <x>390</x>
+          <y>230</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -588,8 +567,8 @@ border-radius:10px;</string>
        <widget class="QTextEdit" name="description_serv">
         <property name="geometry">
          <rect>
-          <x>330</x>
-          <y>100</y>
+          <x>360</x>
+          <y>90</y>
           <width>191</width>
           <height>111</height>
          </rect>
@@ -598,8 +577,8 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="pdf_service">
         <property name="geometry">
          <rect>
-          <x>310</x>
-          <y>240</y>
+          <x>490</x>
+          <y>230</y>
           <width>81</width>
           <height>23</height>
          </rect>
@@ -620,7 +599,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>180</x>
-          <y>10</y>
+          <y>0</y>
           <width>351</width>
           <height>35</height>
          </rect>
@@ -650,7 +629,7 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="nettoyer_2">
         <property name="geometry">
          <rect>
-          <x>471</x>
+          <x>480</x>
           <y>360</y>
           <width>91</width>
           <height>23</height>
@@ -671,8 +650,8 @@ border-radius:10px;</string>
        <widget class="QLineEdit" name="nbr_serv">
         <property name="geometry">
          <rect>
-          <x>331</x>
-          <y>70</y>
+          <x>360</x>
+          <y>60</y>
           <width>113</width>
           <height>20</height>
          </rect>
@@ -682,13 +661,83 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>248</x>
-          <y>70</y>
+          <y>60</y>
           <width>111</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>nb signatures </string>
+         <string>nom departement:</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="comboBox_agent_3">
+        <property name="geometry">
+         <rect>
+          <x>280</x>
+          <y>230</y>
+          <width>101</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">border-color: rgb(255, 0, 255);
+background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>id_service</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>date</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QPushButton" name="play">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>10</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+        </property>
+        <property name="text">
+         <string>play</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="stop">
+        <property name="geometry">
+         <rect>
+          <x>500</x>
+          <y>40</y>
+          <width>75</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+        </property>
+        <property name="text">
+         <string>stop</string>
         </property>
        </widget>
       </widget>
@@ -935,17 +984,17 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>0</x>
-          <y>270</y>
-          <width>451</width>
-          <height>141</height>
+          <y>250</y>
+          <width>471</width>
+          <height>171</height>
          </rect>
         </property>
        </widget>
        <widget class="QPushButton" name="ajouter_agent">
         <property name="geometry">
          <rect>
-          <x>470</x>
-          <y>270</y>
+          <x>480</x>
+          <y>240</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -965,7 +1014,7 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="pushButton_30">
         <property name="geometry">
          <rect>
-          <x>470</x>
+          <x>480</x>
           <y>390</y>
           <width>92</width>
           <height>23</height>
@@ -986,8 +1035,8 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="modifier_agent">
         <property name="geometry">
          <rect>
-          <x>470</x>
-          <y>300</y>
+          <x>480</x>
+          <y>270</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -1007,8 +1056,8 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="supprimer_agent">
         <property name="geometry">
          <rect>
-          <x>470</x>
-          <y>330</y>
+          <x>480</x>
+          <y>300</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -1029,7 +1078,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>240</y>
+          <y>220</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -1050,7 +1099,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>210</x>
-          <y>240</y>
+          <y>220</y>
           <width>92</width>
           <height>23</height>
          </rect>
@@ -1104,7 +1153,7 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>310</x>
-          <y>241</y>
+          <y>220</y>
           <width>101</width>
           <height>21</height>
          </rect>
@@ -1119,7 +1168,7 @@ border-radius:10px;</string>
         </property>
         <item>
          <property name="text">
-          <string>cin_citoyen</string>
+          <string>cin_agent</string>
          </property>
         </item>
         <item>
@@ -1141,8 +1190,8 @@ border-radius:10px;</string>
        <widget class="QPushButton" name="pushButton_9">
         <property name="geometry">
          <rect>
-          <x>470</x>
-          <y>360</y>
+          <x>480</x>
+          <y>330</y>
           <width>91</width>
           <height>23</height>
          </rect>
@@ -1250,10 +1299,31 @@ border-radius:10px;</string>
         <property name="geometry">
          <rect>
           <x>110</x>
-          <y>240</y>
+          <y>220</y>
           <width>71</width>
           <height>20</height>
          </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="pushButton_10">
+        <property name="geometry">
+         <rect>
+          <x>480</x>
+          <y>360</y>
+          <width>91</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">
+background-color:white; 
+color: rgb(255, 0, 255);
+border-style:outset ; 
+border-width:3px ; 
+border-radius:10px;</string>
+        </property>
+        <property name="text">
+         <string>imprimer</string>
         </property>
        </widget>
       </widget>
@@ -1441,7 +1511,7 @@ border-style: outset;
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="tab_3">
        <attribute name="icon">
@@ -4862,8 +4932,8 @@ border-radius:10px;</string>
    <widget class="QPushButton" name="Mission">
     <property name="geometry">
      <rect>
-      <x>226</x>
-      <y>340</y>
+      <x>30</x>
+      <y>270</y>
       <width>75</width>
       <height>23</height>
      </rect>
