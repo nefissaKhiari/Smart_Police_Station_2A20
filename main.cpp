@@ -16,8 +16,8 @@ int main(int argc, char *argv[])
     //login L;
     MainWindow w;
     if(test)
-    { w.show();
-       // w.show();
+    { //L.show();
+       w.show();
         QMessageBox::information(nullptr, QObject::tr("database is open"),
                     QObject::tr("connection successful.\n"
                                 "Click Ok to exit."), QMessageBox::Ok);

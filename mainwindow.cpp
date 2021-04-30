@@ -14,21 +14,22 @@
 #include <QtWidgets>
 #include <QMediaPlayer>
 #include <QVideoWidget>
-//#include "connection.cpp"
-//#include "main.cpp"
 #include "exportexcelobject.h"
 #include <QPropertyAnimation>
 #include <QDateTime>
 #include <QTime>
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
    ui->le_id->setValidator( new QIntValidator(0, 99, this));
    ui->le_id_2->setValidator( new QIntValidator(0, 99, this));
    ui->tab_detenu->setModel(D.afficher_detenu());
    ui->tab_cellule->setModel(C.afficher_cellule());
+
    animation = new QPropertyAnimation (ui ->frame,"geometry" );
                   // animation = new QPropertyAnimation (ui ->text_2,"geometry" );
                    animation->setDuration(3000) ;
@@ -92,7 +93,7 @@ QSqlQuery query1;
              QChartView *chartview= new QChartView (chart);
               chartview->setParent(ui->frame_charts);
 //Arduino***************
- int ret=A.connect_arduino(); // lancer la connexion à arduino
+/* int ret=A.connect_arduino(); // lancer la connexion à arduino
     switch(ret){
     case(0):qDebug()<< "arduino is available and connected to : "<< A.getarduino_port_name();
         break;
@@ -102,7 +103,7 @@ QSqlQuery query1;
     }
      QObject::connect(A.getserial(),SIGNAL(readyRead()),this,SLOT(update_label())); // permet de lancer
      //le slot update_label suite à la reception du signal readyRead (reception des données).
-
+*/
 }
 
 
@@ -129,7 +130,7 @@ void MainWindow::on_pb_ajouter_clicked()
    // QString id_cellule=ui->comboBox->currentText();
     //int id_cellule=ui->le_id_cellule->text().toInt();
 
-    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu/*,id_cellule*/);
+    Detenu D(id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu);
     bool test=D.ajouter_detenu();
     QMessageBox msgBox;
 
@@ -584,17 +585,17 @@ void MainWindow::on_excel_clicked()
            }
 }
 
-void MainWindow::on_Video_clicked()
+/*void MainWindow::on_Video_clicked()
 {
     QMediaPlayer* player=new QMediaPlayer;
     QVideoWidget* Vw=new QVideoWidget;
     player->setVideoOutput(Vw);
-    player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Downloads/Video.mpg"));
+    player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Downloads/spot_pubicitaire_1.mp4"));
     Vw->setGeometry(100,100,600,400);
     Vw->show();
     player->play();
     qDebug()<<player->state();
-}
+}*/
 
 void MainWindow::showtime ()
 {
@@ -607,4 +608,21 @@ void MainWindow::showtime ()
                time_text[8] = ' ';
            }
            ui->digitalclock_2->setText(time_text) ;
+}
+
+
+
+
+
+
+void MainWindow::on_VIDEO_clicked()
+{
+    QMediaPlayer* player=new QMediaPlayer;
+    QVideoWidget* Vw=new QVideoWidget;
+    player->setVideoOutput(Vw);
+    player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Desktop/Videoo.mpg"));
+    Vw->setGeometry(100,100,600,400);
+    Vw->show();
+    player->play();
+    qDebug()<<player->state();
 }

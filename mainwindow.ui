@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>540</height>
+    <width>874</width>
+    <height>582</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -79,7 +79,7 @@ border-radius:10px;
        </font>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="documentMode">
        <bool>false</bool>
@@ -107,9 +107,9 @@ border-radius:10px;
          <widget class="QGroupBox" name="groupBox">
           <property name="geometry">
            <rect>
-            <x>10</x>
-            <y>10</y>
-            <width>651</width>
+            <x>0</x>
+            <y>0</y>
+            <width>611</width>
             <height>431</height>
            </rect>
           </property>
@@ -480,12 +480,12 @@ border-radius:10px;</string>
             <string>Load</string>
            </property>
           </widget>
-          <widget class="QPushButton" name="Video">
+          <widget class="QPushButton" name="VIDEO">
            <property name="geometry">
             <rect>
              <x>510</x>
              <y>330</y>
-             <width>81</width>
+             <width>75</width>
              <height>23</height>
             </rect>
            </property>
@@ -1048,7 +1048,7 @@ border-image:url(C:/Users/ASUS/Desktop/Smart_Police_Station_2A20 final2/ifinal/L
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
+     <width>874</width>
      <height>21</height>
     </rect>
    </property>

@@ -43,7 +43,8 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     connection.cpp \
-   # stats.cpp
+ \   # stats.cpp
+  #  video.cpp
 
 HEADERS += \
     arduino.h \
@@ -54,13 +55,15 @@ HEADERS += \
     login.h \
         mainwindow.h \
     connection.h \
-   # stats.h
+ \   # stats.h
+ #   video.h
 
 FORMS += \
    # dialog.ui \
         login.ui \
         mainwindow.ui \
-       # stats.ui
+ \       # stats.ui
+  #  video.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

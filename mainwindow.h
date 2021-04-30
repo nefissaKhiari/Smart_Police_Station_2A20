@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = nullptr);
+
     ~MainWindow();
 
 private slots:
@@ -79,8 +80,13 @@ private slots:
 
     void on_excel_clicked();
 
-    void on_Video_clicked();
+  //  void on_Video_clicked();
     void showtime () ;
+
+
+
+    void on_VIDEO_clicked();
+
 private:
     Ui::MainWindow *ui;
    Detenu D;

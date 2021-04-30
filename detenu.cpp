@@ -63,8 +63,8 @@ bool Detenu::ajouter_detenu()
   QString taille_detenu_string=QString::number(taille_detenu);
   QString poids_detenu_string=QString::number(poids_detenu);
  // QString id_cellule_string=QString::number(id_cellule);
-    query.prepare("INSERT INTO detenu (id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu,/*id_cellule*/) "
-                  "VALUES (:id_detenu, :nom_detenu, :prenom_detenu,:date_naissance_detenu,:nationalite_detenu,:sexe_detenu,:taille_detenu,:poids_detenu,:periode_detenu,:dossier_detenu,:/*id_cellule*/)");
+    query.prepare("INSERT INTO detenu (id_detenu, nom_detenu, prenom_detenu,date_naissance_detenu,nationalite_detenu,sexe_detenu,taille_detenu,poids_detenu,periode_detenu,dossier_detenu) "
+                  "VALUES (:id_detenu, :nom_detenu, :prenom_detenu,:date_naissance_detenu,:nationalite_detenu,:sexe_detenu,:taille_detenu,:poids_detenu,:periode_detenu,:dossier_detenu)");
     query.bindValue(":id_detenu", id_detenu_string);
     query.bindValue(":nom_detenu", nom_detenu);
     query.bindValue(":prenom_detenu", prenom_detenu);
@@ -75,7 +75,7 @@ bool Detenu::ajouter_detenu()
     query.bindValue(":poids_detenu",poids_detenu_string);
     query.bindValue(":periode_detenu",periode_detenu);
     query.bindValue(":dossier_detenu",dossier_detenu);
-    //query.bindValue(":id_cellule", id_cellule_string);
+
     return query.exec();
 
 }
