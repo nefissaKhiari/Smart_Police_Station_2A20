@@ -620,7 +620,11 @@ void MainWindow::on_VIDEO_clicked()
     QMediaPlayer* player=new QMediaPlayer;
     QVideoWidget* Vw=new QVideoWidget;
     player->setVideoOutput(Vw);
-    player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Desktop/Videoo.mpg"));
+    QString filename=QFileDialog::getOpenFileName((this));
+        if(filename.isEmpty())
+        return;
+    player->setMedia(QUrl::fromLocalFile(filename));;
+   // player->setMedia(QUrl::fromLocalFile("C:/Users/ASUS/Desktop/Videoo.mpg"));
     Vw->setGeometry(100,100,600,400);
     Vw->show();
     player->play();
