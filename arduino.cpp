@@ -1,4 +1,4 @@
-#include "arduino.h"
+/*#include "arduino.h"
 
 Arduino::Arduino()
 {
@@ -79,4 +79,4 @@ int Arduino::write_to_arduino( QByteArray d)
 
 
 }
-
+*/

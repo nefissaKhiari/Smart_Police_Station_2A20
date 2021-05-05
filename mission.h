@@ -1,6 +1,5 @@
 #ifndef mission_H
 #define mission_H
-
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
@@ -45,3 +44,4 @@ private:
 };
 
 #endif // mission_H
+

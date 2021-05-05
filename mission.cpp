@@ -126,3 +126,4 @@ QSqlQueryModel * mission::rechercher_mission(QString rech)
 
         return model;
 }
+
